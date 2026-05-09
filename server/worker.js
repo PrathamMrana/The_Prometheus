@@ -494,9 +494,27 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                     const canonical = sym.replace(".NS", "").replace("^", "");
                     if (canonical) {
                         const existing = portfolioCache.get(canonical) || {};
+                        
+                        // 🛡️ [PHASE 21] WEEKEND/STALL GUARD
+                        // If the new data says 0% change but the price hasn't moved, 
+                        // keep the old percent to avoid zeroing out the board on weekends.
+                        const newPrice = data.price;
+                        const oldPrice = existing.price;
+                        const newPct = data.percent !== undefined ? data.percent : data.pct_change;
+                        
+                        let finalPercent = newPct;
+                        // Only preserve if new data is exactly 0 and old data was valid
+                        if (newPct === 0 && existing.percent && existing.percent !== 0) {
+                            if (!newPrice || !oldPrice || Math.abs(newPrice - oldPrice) < 0.0001) {
+                                finalPercent = existing.percent;
+                            }
+                        }
+
                         portfolioCache.set(canonical, {
                             ...existing,
                             ...data,
+                            percent: finalPercent,
+                            pct_change: finalPercent,
                             is_lkg: data.source === 'LKG'
                         });
                         // 🔱 [PERF] Ingest into tick coalescer after cache is updated

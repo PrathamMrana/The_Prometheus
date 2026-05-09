@@ -135,27 +135,29 @@ def fetch_single_symbol(sym):
     try:
         ticker = yf.Ticker(sym, session=session)
         
-        # 🔱 [PHASE 1] PRIMARY DATA: 5-Day History (15m intervals)
-        hist = ticker.history(period="5d", interval="15m")
-        
+        # 🔱 [PHASE 1] PRIMARY DATA: 7-Day History (15m intervals) - 7d ensures we cross weekend boundaries
+        hist = ticker.history(period="7d", interval="15m")
+        if hist.empty:
+            return None
+            
         # 🔱 [PHASE 2] FALLBACK DATA: fast_info
         finfo = ticker.fast_info
         
         # Corrected keys for fast_info (camelCase required in some yf versions)
         last_price_fi = finfo.get('lastPrice') or finfo.get('last_price') or finfo.get('regularMarketPrice')
         prev_close_fi = finfo.get('previousClose') or finfo.get('previous_close') or finfo.get('regularMarketPreviousClose')
-        if hist.empty:
-            return None
 
         # 🔱 [PHASE 3] PROCESS HISTORY
         last_ts = hist.index[-1]
         last_day = last_ts.date()
         
         # Find the PREVIOUS trading day's close for accurate pct_change
+        # We look for the last candle whose date is strictly less than the last data point's date
         prev_day_data = hist[hist.index.date < last_day]
         if not prev_day_data.empty:
             prev_close = float(prev_day_data['Close'].iloc[-1])
         else:
+            # If no previous day in hist (rare for 7d), fallback to fast_info or first candle
             prev_close = prev_close_fi or float(hist['Close'].iloc[0])
 
         curr_price = float(hist['Close'].iloc[-1])
@@ -163,36 +165,24 @@ def fetch_single_symbol(sym):
         # If fast_info has a more recent price (spot price), prioritize it
         if last_price_fi and abs(last_price_fi - curr_price) / curr_price > 0.0001:
              curr_price = last_price_fi
-        
-        closes = [float(c) for c in hist['Close'].tolist()]
-        times = [int(t.timestamp()) for t in hist.index]
-        highs = [float(h) for h in hist['High'].tolist()]
-        lows = [float(l) for l in hist['Low'].tolist()]
-        
-        # [PHASE 12] High Fidelity Metadata
-        volume = int(hist['Volume'].iloc[-1]) if not hist.empty else 0
-        volumes = [int(v) for v in hist['Volume'].tolist()] if not hist.empty else []
-        if finfo.get('lastVolume') or finfo.get('last_volume'):
-            volume = int(finfo.get('lastVolume') or finfo.get('last_volume'))
-            
-        # 🔱 [TIMESTAMP FIDELITY] Use actual market data timestamp (Purity Lock)
-        market_ts_ms = int(last_ts.to_pydatetime().timestamp() * 1000)
-        if hasattr(last_ts, 'tz_localize'):
-            market_ts_ms = int(last_ts.tz_localize(None).timestamp() * 1000)
+
+        # 🔱 [SCHEMA FIX] Ensure we always have pct_change even if info() fails
+        pct_change = 0
+        if prev_close and prev_close > 0:
+            pct_change = round(((curr_price - prev_close) / prev_close) * 100, 4)
 
         return sym, {
-            "close": closes,
-            "high": highs,
-            "low": lows,
-            "volumes": volumes,
-            "timestamp": times,
-            "previousClose": prev_close,
-            "regularMarketPreviousClose": prev_close,
+            "close": [float(c) for c in hist['Close'].tolist()],
+            "high": [float(h) for h in hist['High'].tolist()],
+            "low": [float(l) for l in hist['Low'].tolist()],
             "price": curr_price,
-            "volume": volume,
-            "data_timestamp": market_ts_ms
+            "prev_close": prev_close,
+            "pct_change": pct_change,
+            "timestamp": [int(t.timestamp()) for t in hist.index],
+            "data_timestamp": int(last_ts.timestamp() * 1000)
         }
-    except Exception:
+    except Exception as e:
+        print(f"Error fetching {sym}: {str(e)}", file=sys.stderr)
         return None
 
 
