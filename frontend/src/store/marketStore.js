@@ -105,10 +105,12 @@ export const useMarketStore = create((set, get) => ({
       // If we receive an empty state, preserve existing data and wait for recovery.
       if (listToProcess.length === 0) {
         if (Object.keys(state.market).length > 0) {
-            return { ...state, feedState: 'RECOVERING' };
+            return { ...state, feedState: 'RECOVERING', health: nextHealth };
         }
-        return state; // No-op if we have nothing and got nothing
+        return { ...state, health: nextHealth }; // No-op if we have nothing and got nothing
       }
+
+      console.log(`[WS RECEIVE STATE] | Tickers: ${listToProcess.length}`);
 
       listToProcess.forEach((d) => {
         const rawSymbol = d.symbol || "";
@@ -161,13 +163,17 @@ export const useMarketStore = create((set, get) => ({
         };
       });
 
-      return { ...state, market: newMarket, feedState: 'LIVE' };
+      return { ...state, market: newMarket, feedState: 'LIVE', health: nextHealth };
     }
 
     // ⚡ [FIX 2] SAFE TICK MERGE MAPPED FOR DELTAS
     if (payload.type === 'TICK' || payload.type === 'TICK_DELTA') {
       const updates = payload.type === 'TICK_DELTA' ? payload.updates : [payload];
-      if (!updates || !updates.length) return state;
+      if (!updates || !updates.length) return { ...state, health: nextHealth };
+
+      console.log(`[WS RECEIVE ${payload.type}] | Updates: ${updates.length}`);
+      
+      const nextTickIdMap = { ...state.lastTickIdMap };
 
       updates.forEach(d => {
         const rawSymbol = d.symbol || "";
@@ -221,8 +227,17 @@ export const useMarketStore = create((set, get) => ({
           timestamp: d.timestamp || newMarket[key]?.timestamp || Date.now()
         };
 
-        state.lastTickIdMap[key] = id;
+        nextTickIdMap[key] = id;
       });
+
+      return {
+        ...state,
+        market: newMarket,
+        lastTickIdMap: nextTickIdMap,
+        lastUpdate: Date.now(),
+        sync_id: payload.sync_id || state.sync_id,
+        health: nextHealth
+      };
     }
  
     if (payload.type === 'LOG') {
@@ -232,7 +247,7 @@ export const useMarketStore = create((set, get) => ({
         type: payload.logType || 'SYSTEM',
         msg: payload.message || payload.text || 'Core process update'
       };
-      return { ...state, logs: [newLog, ...state.logs].slice(0, 100) };
+      return { ...state, logs: [newLog, ...state.logs].slice(0, 100), health: nextHealth };
     }
 
     return {

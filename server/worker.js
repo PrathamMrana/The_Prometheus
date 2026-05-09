@@ -752,8 +752,8 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                     const isIndexFinal = isIndex || NON_TRADABLE_SECTORS.includes(symbolSector);
 
                     if (healthMonitor.metrics.defensiveMode) {
-                        console.warn('🛡️ [DEFENSIVE_MODE] Suppressing signal generation during telemetry instability.');
-                        return;
+                        console.warn('🛡️ [DEFENSIVE_MODE] ACTIVE: Telemetry instability detected. Proceeding with caution.');
+                        // Temporarily bypassed for debugging as per user request
                     }
                     
                     const p17Signal = isIndexFinal
@@ -1036,6 +1036,8 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
 
                 // 🚀 [PHASE 10.2] REAL-TIME TICK BROADCAST
                 if (changedSymbols.length > 0) {
+                    const sample = changedSymbols[0];
+                    console.log(`[TICK_DELTA GENERATED] | Symbols: ${changedSymbols.length} | Sample: ${sample.symbol} | Price: ${sample.price} | Prev: ${sample.prevClose} | %: ${sample.pct_change}`);
                     broadcast({
                         type: "TICK_DELTA",
                         updates: changedSymbols,

@@ -171,6 +171,13 @@ function syncOnConnect(ws, req) {
             const tId = setTimeout(() => {
                 if (ws.readyState === WebSocket.OPEN) {
                     const chunk = snapshot.slice(i, i + chunkSize);
+                    
+                    // 🔱 [DEBUG LOG]
+                    if (chunk.length > 0) {
+                        const sample = chunk[0];
+                        console.log(`[WS EMIT STATE CHUNK] | Symbols: ${chunk.length} | Sample: ${sample.symbol} | Price: ${sample.price} | Prev: ${sample.prevClose} | %: ${sample.percent}`);
+                    }
+
                     ws.send(JSON.stringify({
                         type: "STATE",
                         timestamp: Date.now(),
@@ -235,8 +242,14 @@ function broadcast(data) {
         });
 
         if (validTicks.length === 0) return;
-        if (data.type === 'TICK_DELTA') data.updates = validTicks;
-        else data = validTicks[0];
+        if (data.type === 'TICK_DELTA') {
+            data.updates = validTicks;
+            const sample = validTicks[0];
+            console.log(`[WS EMIT TICK_DELTA] | Updates: ${validTicks.length} | Sample: ${sample.symbol} | Price: ${sample.price} | Prev: ${sample.prevClose} | %: ${sample.pct_change}`);
+        } else {
+            data = validTicks[0];
+            console.log(`[WS EMIT TICK] | Symbol: ${data.symbol} | Price: ${data.price} | Prev: ${data.prevClose} | %: ${data.pct_change}`);
+        }
     }
     
     // 🛡️ [PHASE 3] CRASH ISOLATION LOOP
