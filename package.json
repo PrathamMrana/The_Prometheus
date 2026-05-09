@@ -6,9 +6,10 @@
   "scripts": {
     "start": "cd frontend && npm run dev",
     "kill-port": "kill -9 $(lsof -t -i:3000,3001,3002,5173) 2>/dev/null; echo 'Ports cleared'",
-    "server": "node --inspect --expose-gc --max-old-space-size=2048 server/index.js",
+    "server": "node --expose-gc server/index.js",
     "dev": "npm run kill-port && concurrently \"npm run server\" \"npm run start\"",
-    "build": "react-scripts build"
+    "build": "cd frontend && npm run build",
+    "start:prod": "node server/index.js"
   },
   "keywords": [],
   "author": "",
