@@ -135,8 +135,9 @@ def fetch_single_symbol(sym):
     try:
         ticker = yf.Ticker(sym, session=session)
         
-        # 🔱 [PHASE 1] PRIMARY DATA: 7-Day History (15m intervals) - 7d ensures we cross weekend boundaries
-        hist = ticker.history(period="7d", interval="15m")
+        # 🔱 [PHASE 1] PRIMARY DATA: 7-Day History (15m intervals)
+        # Use raw prices (auto_adjust=False) to match exchange-reported numbers exactly.
+        hist = ticker.history(period="7d", interval="15m", auto_adjust=False, back_adjust=False)
         if hist.empty:
             return None
             

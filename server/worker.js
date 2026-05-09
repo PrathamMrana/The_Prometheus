@@ -520,8 +520,8 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                             ...existing,
                             ...data,
                             price: newPrice,
-                            percent: finalPercent,
-                            pct_change: finalPercent,
+                            percent: newPct, // 🔱 [FIX] Force fresh percent on boot
+                            pct_change: newPct,
                             symbol: canonical,
                             is_lkg: data.source === 'LKG'
                         });
