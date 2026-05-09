@@ -81,10 +81,13 @@ export const useMarketStore = create((set, get) => ({
       const prices = payload.data?.prices || list;
       const listToProcess = Array.isArray(prices) ? prices : Object.values(prices);
 
-      // 🛡️ [GRACEFUL DEGRADATION] If we receive an empty state but already have market data, 
-      // do NOT wipe the board. This prevents the "NO DATA" flicker during backend restarts.
-      if (listToProcess.length === 0 && Object.keys(state.market).length > 0) {
-        return { ...state, feedState: 'RECOVERING' };
+      // 🛡️ [GRACEFUL DEGRADATION] Resilience Guard
+      // If we receive an empty state, preserve existing data and wait for recovery.
+      if (listToProcess.length === 0) {
+        if (Object.keys(state.market).length > 0) {
+            return { ...state, feedState: 'RECOVERING' };
+        }
+        return state; // No-op if we have nothing and got nothing
       }
 
       listToProcess.forEach((d) => {

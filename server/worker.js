@@ -1022,9 +1022,10 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                     });
                 }
 
-                // 🔱 [PHASE 21] Throttled full STATE broadcast (Every 10 cycles)
-                // Prevents network saturation while ensuring periodic global sync.
-                if (SYSTEM_STATE.CYCLE_COUNT % 10 === 0) {
+                // 🔱 [PHASE 21] Throttled full STATE broadcast
+                // Throttled to every 10 cycles, but FORCED on first cycle (0) to ensure immediate UI hydration.
+                if (SYSTEM_STATE.CYCLE_COUNT === 0 || SYSTEM_STATE.CYCLE_COUNT % 10 === 0) {
+                    console.log(`🚀 [SYNC] Broadcasting full STATE snapshot (Cycle: ${SYSTEM_STATE.CYCLE_COUNT})`);
                     broadcast({
                         type: "STATE",
                         data: Array.from(portfolioCache.values()),
