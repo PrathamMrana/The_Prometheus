@@ -1,9 +1,10 @@
 services:
   - type: web
     name: prometheus-api
-    runtime: node
+    env: node
     plan: free
-    buildCommand: npm install && cd server && npm install && pip install -r requirements.txt
+    nodeVersion: 20.0.0
+    buildCommand: npm install && cd server && npm install && pip3 install -r requirements.txt
     startCommand: node server/index.js
     envVars:
       - key: NODE_ENV

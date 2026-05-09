@@ -2,5 +2,5 @@ yfinance>=0.2.36
 pandas>=2.0.0
 numpy>=1.26.0
 scikit-learn>=1.4.0
-tensorflow>=2.15.0
+# tensorflow>=2.15.0
 # Optimized for Render/Docker
