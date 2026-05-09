@@ -113,8 +113,17 @@ export const useWebSocket = (url) => {
     isConnecting.current = true;
     console.log(`[WS] Initializing Connection (Attempt ${retryCount.current + 1})...`);
     
-    const wsUrl = url.startsWith('/') 
-      ? (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + url
+    const wsUrl = url.startsWith('/')
+      ? (() => {
+          const apiBase = import.meta.env.VITE_API_URL;
+          if (apiBase) {
+            // In production: derive wss:// from the configured backend URL
+            const wsBase = apiBase.replace(/^https:\/\//, 'wss://').replace(/^http:\/\//, 'ws://');
+            return `${wsBase}${url}`;
+          }
+          // In local dev: use the page's own host (backend and frontend share same origin)
+          return (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + url;
+        })()
       : url;
 
     ws.current = new WebSocket(wsUrl);
