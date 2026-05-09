@@ -39,11 +39,16 @@ router.get('/state', (req, res) => {
     const cache = Persistence.load();
     const state = marketState.getState();
     
-    // 🛡️ [FIX] Filter out ghost symbols that failed to fetch completely (e.g. 404 delisted)
+    // 🛡️ [PHASE 21] INSTITUTIONAL HYDRATION RECONCILIATION
     const validPrices = {};
-    for (const [key, value] of cache.entries()) {
+    for (const [rawKey, value] of cache.entries()) {
+        const key = rawKey.replace(".NS", "").replace("^", "");
         if (value && typeof value.price === 'number' && value.price > 0) {
-            validPrices[key] = value;
+            validPrices[key] = {
+                ...value,
+                symbol: key,
+                rawSymbol: rawKey
+            };
         }
     }
 

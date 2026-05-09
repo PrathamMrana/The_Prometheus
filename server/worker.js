@@ -280,7 +280,15 @@ async function start() {
     // 🔱 [PHASE 17] SEED PRICE HISTORY FROM CACHE
     // This ensures intelligence (RSI, EMA, ML) has immediate data upon reboot.
     console.log('⚡ [PROMETHEUS] BOOT: Seeding Price History from LKG Sparklines...');
-    for (const [key, entry] of portfolioCache.entries()) {
+    for (let [key, entry] of portfolioCache.entries()) {
+        // 🛡️ [PHASE 21] Ensure key is canonical (No .NS)
+        const canonical = key.replace(".NS", "").replace("^", "");
+        if (canonical !== key) {
+            portfolioCache.delete(key);
+            portfolioCache.set(canonical, { ...entry, symbol: canonical });
+            key = canonical;
+        }
+
         if (entry.sparkline && Array.from(entry.sparkline).length > 0) {
             const hasVolHistory = entry.volume_history && Array.from(entry.volume_history).length === Array.from(entry.sparkline).length;
             const history = Array.from(entry.sparkline).map((price, idx) => ({
@@ -288,7 +296,7 @@ async function start() {
                 high: price,
                 low: price,
                 volume: hasVolHistory ? entry.volume_history[idx] : (entry.volume || 0),
-                timestamp: 0 // 🔱 [Purity Lock] No fake boot timestamps
+                timestamp: 0 
             }));
             priceHistory.set(key, history);
         }
@@ -495,17 +503,15 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                     if (canonical) {
                         const existing = portfolioCache.get(canonical) || {};
                         
-                        // 🛡️ [PHASE 21] WEEKEND/STALL GUARD
-                        // If the new data says 0% change but the price hasn't moved, 
-                        // keep the old percent to avoid zeroing out the board on weekends.
-                        const newPrice = data.price;
-                        const oldPrice = existing.price;
+                        // 🛡️ [PRICE_INTEGRITY_GUARD] Never overwrite a valid price with 0/null
+                        const newPrice = (data.price && data.price > 0) ? data.price : existing.price;
+                        if (!newPrice || newPrice <= 0) continue;
+
                         const newPct = data.percent !== undefined ? data.percent : data.pct_change;
                         
                         let finalPercent = newPct;
-                        // Only preserve if new data is exactly 0 and old data was valid
                         if (newPct === 0 && existing.percent && existing.percent !== 0) {
-                            if (!newPrice || !oldPrice || Math.abs(newPrice - oldPrice) < 0.0001) {
+                            if (!newPrice || !existing.price || Math.abs(newPrice - existing.price) < 0.0001) {
                                 finalPercent = existing.percent;
                             }
                         }
@@ -513,12 +519,13 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                         portfolioCache.set(canonical, {
                             ...existing,
                             ...data,
+                            price: newPrice,
                             percent: finalPercent,
                             pct_change: finalPercent,
+                            symbol: canonical,
                             is_lkg: data.source === 'LKG'
                         });
-                        // 🔱 [PERF] Ingest into tick coalescer after cache is updated
-                        if (data.price && data.price > 0) {
+                        if (newPrice > 0) {
                             tickCoalescer.ingest(canonical, portfolioCache.get(canonical));
                         }
                     }
@@ -1023,10 +1030,9 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                 }
 
                 // 🔱 [PHASE 21] Throttled full STATE broadcast
-                // Throttled to every 10 cycles, but FORCED on first cycle (0) to ensure immediate UI hydration.
-                if (SYSTEM_STATE.CYCLE_COUNT === 0 || SYSTEM_STATE.CYCLE_COUNT % 10 === 0) {
+                // Throttled to every 5 cycles, but FORCED on first cycle (1) to ensure immediate UI hydration.
+                if (SYSTEM_STATE.CYCLE_COUNT === 1 || SYSTEM_STATE.CYCLE_COUNT % 5 === 0) {
                     console.log(`🚀 [SYNC] Broadcasting full STATE snapshot (Cycle: ${SYSTEM_STATE.CYCLE_COUNT})`);
-                    // 🔱 [PHASE 21 FIX] Ensure symbols are mapped into the objects so marketStore can identify them
                     const snapshot = Array.from(portfolioCache.entries()).map(([symbol, data]) => ({
                         ...data,
                         symbol: symbol
