@@ -107,7 +107,13 @@ app.get('/api/system/logs', (req, res) => {
 // 🔒 INSTITUTIONAL SYNC COORDINATOR
 const syncCoordinator = require('./apiLayer/syncCoordinator');
 app.get('/api/sync/snapshot', (req, res) => {
-    res.json({ success: true, snapshot: syncCoordinator.getSnapshot() });
+    const Persistence = require('./utils/persistence');
+    const cache = Persistence.load();
+    res.json({ 
+        success: true, 
+        sync_id: syncCoordinator.getSyncId(),
+        snapshot: Object.fromEntries(cache) 
+    });
 });
 
 // 🎯 DYNAMIC PRIORITY CONTROLLER

@@ -1198,20 +1198,12 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
     let isWarming = true;
     console.log('🚀 [PHASE 21] INSTITUTIONAL WARMUP INITIATED...');
     
-    // 🛡️ [STEP 1] Immediate Persistence Hydration
-    const cache = Persistence.load();
-    if (cache.size > 0) {
-        console.log(`✅ [WARMUP] Cache Hydrated: ${cache.size} symbols ready.`);
-        // Prime the priceHistory for all symbols to avoid Score 50 artifacts
-        for (const [sym, entry] of cache.entries()) {
-            if (entry.sparkline && entry.sparkline.length > 0) {
-                priceHistory.set(sym, entry.sparkline.map(p => ({
-                    close: p, high: p, low: p, volume: 0, timestamp: Date.now()
-                })));
-            }
-        }
+    // 🔥 [PHASE 21] Persistence hydration and history seeding already handled in boot sequence.
+    // We simply verify the cache is ready before starting.
+    if (portfolioCache && portfolioCache.size > 0) {
+        console.log(`✅ [WARMUP] Shared Cache Verified: ${portfolioCache.size} symbols ready.`);
     } else {
-        console.warn('⚠️ [WARMUP] No LKG cache or bootstrap found. Starting from scratch.');
+        console.warn('⚠️ [WARMUP] Shared Cache EMPTY. Starting from scratch.');
     }
 
     if (universeArray.length === 0) {
