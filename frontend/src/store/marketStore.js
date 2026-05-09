@@ -53,12 +53,13 @@ export const useMarketStore = create((set, get) => ({
     if (!payload) return state;
 
     // 🔱 [PHASE 21] INSTITUTIONAL HEALTH SYNC
+    let nextHealth = state.health;
     if (payload.health) {
-      state.health = { ...state.health, ...payload.health, lastSync: Date.now() };
+      nextHealth = { ...state.health, ...payload.health, lastSync: Date.now() };
     }
 
     if (payload.type === 'HEARTBEAT') {
-      return { ...state };
+      return { ...state, health: nextHealth };
     }
 
     if (payload.type === 'GLOBAL_STATE') {
@@ -75,12 +76,12 @@ export const useMarketStore = create((set, get) => ({
       }
 
       const isChanged = JSON.stringify(state.global) !== JSON.stringify(g);
-      if (!isChanged && feedState === state.feedState) return state;
-      return { ...state, global: g, feedState, feedDataAge, allowEntry, allowExit };
+      if (!isChanged && feedState === state.feedState) return { ...state, health: nextHealth };
+      return { ...state, global: g, feedState, feedDataAge, allowEntry, allowExit, health: nextHealth };
     }
 
     if (payload.type === 'TELEMETRY_STATE') {
-      return { ...state, telemetry: payload.payload };
+      return { ...state, telemetry: payload.payload, health: nextHealth };
     }
 
     if (payload.type === 'OPPORTUNITY_BOARD') {
@@ -88,6 +89,7 @@ export const useMarketStore = create((set, get) => ({
         ...state, 
         opportunityBoard: payload.payload || [],
         boardMeta: payload.meta || state.boardMeta, // Phase 10: market context
+        health: nextHealth
       };
     }
 
@@ -237,7 +239,8 @@ export const useMarketStore = create((set, get) => ({
       ...state,
       market: newMarket,
       lastUpdate: Date.now(),
-      sync_id: payload.sync_id || state.sync_id
+      sync_id: payload.sync_id || state.sync_id,
+      health: nextHealth
     };
   }),
 

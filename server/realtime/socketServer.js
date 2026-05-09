@@ -112,6 +112,16 @@ function syncOnConnect(ws, req) {
     try {
         const cache = Persistence.load();
         const sync_id = syncCoordinator.getSyncId();
+
+        // 🔱 [PHASE 21] IMMEDIATE HEALTH HYDRATION
+        // Deliver the current system health score and diagnostics immediately upon connection.
+        // This prevents the UI from showing 'STALLED' while waiting for the first chunk.
+        ws.send(JSON.stringify({
+            type: 'HEARTBEAT',
+            timestamp: Date.now(),
+            sync_id,
+            health: healthMonitor.getDiagnostics()
+        }));
         
         // 🛡️ [FIX 2] BUILD CLEAN SNAPSHOT (Filter DEAD/NO_DATA)
         const snapshot = [];
