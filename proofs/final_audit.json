@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-05-08T08:03:05.616Z",
+  "matrix": [
+    {
+      "Layer": "Portfolio",
+      "Value": 1012149.6,
+      "Status": "TRUTH"
+    },
+    {
+      "Layer": "Broker",
+      "Value": "RECONCILED",
+      "Status": "RECONCILED"
+    },
+    {
+      "Layer": "Frontend",
+      "Value": "RECONCILED",
+      "Status": "VERIFIED_VIA_DOM"
+    }
+  ],
+  "verdict": "FORENSICALLY_CONSISTENT"
+}

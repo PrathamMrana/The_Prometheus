@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-05-08T06:32:07.688Z",
+  "throughput": {
+    "iterations": 1000,
+    "durationMs": 2091,
+    "ordersPerSec": "478.24"
+  },
+  "bottleneck": "DISK_IO (Synchronous Ledger Writes)"
+}

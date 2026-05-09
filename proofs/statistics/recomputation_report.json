@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-05-08T08:00:56.723Z",
+  "metrics": {
+    "winRate": "62.73%",
+    "sharpe": "5.7387",
+    "meanReturn": "0.005157",
+    "stdReturn": "0.014265"
+  },
+  "formula": "Sharpe = (MeanReturn / StdReturn) * sqrt(252)"
+}

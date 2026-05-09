@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-05-08T11:03:34.076Z",
+  "hostileFlood": {
+    "size": 2000,
+    "success": 1379,
+    "rejected": 621,
+    "durationMs": 14265
+  }
+}

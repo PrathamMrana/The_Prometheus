@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-05-08T11:11:31.342Z",
+  "deterministic": true,
+  "hashA": "e27272d6e86c1eb89c00832d870b5ec5d0e8d1dd023a47cbdec58a6548ecce8d",
+  "hashB": "e27272d6e86c1eb89c00832d870b5ec5d0e8d1dd023a47cbdec58a6548ecce8d",
+  "ledger": "server/data/execution_ledger.jsonl",
+  "metrics": {
+    "match": "100%",
+    "drift": "0.00"
+  }
+}

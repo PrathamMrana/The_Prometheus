@@ -1,0 +1,28 @@
+{
+  "snapshotDate": "2026-05-08",
+  "generatedAt": "2026-05-08T20:41:31.020Z",
+  "version": 4,
+  "verdict": "FRAGILE_SINGLE_REGIME_EDGE",
+  "defenseMetrics": {
+    "sampleQualityScore": 0,
+    "sampleQualityStatus": "LOW_QUALITY_SAMPLE",
+    "outlierDominated": false,
+    "walkForwardStatus": "INSUFFICIENT_DATA",
+    "edgeDiversityScore": 25,
+    "equityConsistencyStatus": "STABLE"
+  },
+  "performance": {
+    "totalTrades": 3,
+    "expectancy": 4.8333,
+    "alphaRetention": -7673.7579310344845,
+    "winRate": 66.67,
+    "profitFactor": 1.1686
+  },
+  "statisticalValidation": {
+    "trimmedExpectancy": 0,
+    "oosExpectancy": 0,
+    "oosDegradation": 0,
+    "sharpeProxy": 0,
+    "profitableRegimes": 1
+  }
+}

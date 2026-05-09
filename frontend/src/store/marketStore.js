@@ -1,0 +1,203 @@
+import { create } from 'zustand';
+
+export const useMarketStore = create((set, get) => ({
+  market: {},
+  global: {
+    regime: "SIDEWAYS",
+    risk: "LOW",
+    riskReason: "Stable market",
+    sectorFlow: { BANKING: { value: 0, trend: "FLAT" }, IT: { value: 0, trend: "FLAT" }, AUTO: { value: 0, trend: "FLAT" } },
+    advanceDecline: { advancers: 0, decliners: 0 },
+    topMovers: { gainers: [], losers: [] }
+  },
+  anomalies: [],
+  macro: [],
+  health: { status: 'LIVE', latency: 0, sources: {} },
+  telemetry: null, // 🔱 [PHASE 19] Execution telemetry snapshot
+  opportunityBoard: [], // 🔱 [PHASE 20] Ranked opportunity leaderboard
+  boardMeta: null, // Phase 10: market context from backend
+  sync_id: 0,
+  lastUpdate: Date.now(),
+  globalLatency: 0,
+  lastTickIdMap: {},
+  symbolLoading: null,
+  symbolMeta: {},
+  logs: [],
+  // Phase 10: graded feed state from backend state machine
+  feedState: 'LIVE',      // LIVE | DELAYED | STALE | DISCONNECTED
+  feedDataAge: 0,         // ms since last confirmed tick
+  allowEntry: true,       // from backend trading rules
+  allowExit: true,        // from backend trading rules
+
+  freeze: false,
+  setFreeze: (val) => set({ freeze: val }),
+
+  setSymbolLoading: (sym) => set({ symbolLoading: sym }),
+  setSymbolMeta: (sym) => set((s) => ({
+    symbolMeta: { ...s.symbolMeta, [sym]: true }
+  })),
+
+  applyUpdate: (payload) => set((state) => {
+    // 🥶 [PHASE 6] GLOBAL HARD BLOCK
+    if (state.freeze) return state;
+
+    if (!payload || payload.type === 'HEARTBEAT') return state;
+
+    if (payload.type === 'GLOBAL_STATE') {
+      const g = payload.payload || state.global;
+      // Phase 10: extract feed state fields emitted by backend FeedStateMachine
+      const feedState    = g.feedState    ?? state.feedState;
+      const feedDataAge  = g.feedDataAge  ?? state.feedDataAge;
+      const allowEntry   = g.allowEntry   ?? state.allowEntry;
+      const allowExit    = g.allowExit    ?? state.allowExit;
+      const isChanged = JSON.stringify(state.global) !== JSON.stringify(g);
+      if (!isChanged && feedState === state.feedState) return state;
+      return { ...state, global: g, feedState, feedDataAge, allowEntry, allowExit };
+    }
+
+    if (payload.type === 'TELEMETRY_STATE') {
+      return { ...state, telemetry: payload.payload };
+    }
+
+    if (payload.type === 'OPPORTUNITY_BOARD') {
+      return { 
+        ...state, 
+        opportunityBoard: payload.payload || [],
+        boardMeta: payload.meta || state.boardMeta, // Phase 10: market context
+      };
+    }
+
+    let newMarket = { ...state.market };
+
+    // 🔥 [FIX 1] PROPER STATE SNAPSHOT ARRAY
+    if (payload.type === 'STATE') {
+      const list = payload.data || [];
+      const prices = payload.data?.prices || list;
+
+      if (list.anomalies) {
+        set((s) => ({ ...s, anomalies: list.anomalies }));
+      }
+
+      const listToProcess = Array.isArray(prices) ? prices : Object.values(prices);
+
+      listToProcess.forEach((d) => {
+        const rawSymbol = d.symbol || "";
+        const key = rawSymbol.split(".")[0]?.trim().toUpperCase();
+        if (!key || !Number.isFinite(d.price)) return;
+        if (d.status === 'DEAD') return;
+
+        const currency = rawSymbol.includes('.NS') ? 'INR' : 'USD';
+
+        // 🔒 [SAFE FALLBACK] Only trigger when Phase 17 pipeline hasn't produced signal yet.
+        if (!d.signal) {
+          d.signal = { 
+            status: "COMPUTING",
+            loading: true,
+            decision: "LOADING"
+          };
+        }
+
+        newMarket[key] = {
+          symbol: key,
+          rawSymbol: rawSymbol,
+          currency: currency,
+          price: d.price,
+          percent: d.percent,
+          sparkline: d.sparkline || newMarket[key]?.sparkline || [],
+          signal: d.signal,
+          anomaly: d.anomaly || newMarket[key]?.anomaly || null,
+          zscore: d.zscore || newMarket[key]?.zscore || 0,
+          alerts: d.alerts || newMarket[key]?.alerts || [],
+          priority: d.priority || newMarket[key]?.priority || "NORMAL",
+          timestamp: d.timestamp || Date.now(),
+          status: d.status || "LIVE"
+        };
+      });
+    }
+
+    // ⚡ [FIX 2] SAFE TICK MERGE MAPPED FOR DELTAS
+    if (payload.type === 'TICK' || payload.type === 'TICK_DELTA') {
+      const updates = payload.type === 'TICK_DELTA' ? payload.updates : [payload];
+      if (!updates || !updates.length) return state;
+
+      updates.forEach(d => {
+        const rawSymbol = d.symbol || "";
+        const key = rawSymbol.split(".")[0]?.trim();
+        if (!key) return;
+
+        const id = `${key}-${d.timestamp}`;
+        if (state.lastTickIdMap[key] === id) return;
+
+        // 🔱 [PURITY LOCK] Only filter by valid price — never silently drop real market data
+        if (!Number.isFinite(Number(d.price)) || d.price <= 0) return;
+
+        const currency = rawSymbol.includes('.NS') ? 'INR' : (newMarket[key]?.currency || 'USD');
+
+        newMarket[key] = {
+          ...(newMarket[key] || {}),
+          ...d,
+          symbol: key,
+          rawSymbol: rawSymbol,
+          currency: currency,
+          price: Number.isFinite(d.price) ? d.price : (newMarket[key]?.price ?? null),
+          percent: Number.isFinite(d.percent || d.pct_change) ? (d.percent || d.pct_change) : (newMarket[key]?.percent ?? null),
+          sparkline: d.sparkline && d.sparkline.length > 0 ? d.sparkline : (newMarket[key]?.sparkline || []),
+          // 🔱 [PURITY LOCK] Keep existing signal if new tick hasn't been processed by intelligence yet
+          signal: (d.signal && (d.signal.decision || d.signal.score)) ? d.signal : (newMarket[key]?.signal || { decision: 'LOADING', score: 0 }),
+          anomaly: d.anomaly || newMarket[key]?.anomaly || null,
+          zscore: Number.isFinite(d.zscore) ? d.zscore : (newMarket[key]?.zscore || 0),
+          alerts: d.alerts || newMarket[key]?.alerts || [],
+          priority: d.priority || newMarket[key]?.priority || 'NORMAL',
+          timestamp: d.timestamp || newMarket[key]?.timestamp || Date.now()
+        };
+
+        state.lastTickIdMap[key] = id;
+      });
+    }
+ 
+    if (payload.type === 'LOG') {
+      const newLog = {
+        id: Date.now() + Math.random(),
+        time: new Date().toLocaleTimeString('en-IN', { hour12: false }),
+        type: payload.logType || 'SYSTEM',
+        msg: payload.message || payload.text || 'Core process update'
+      };
+      return { ...state, logs: [newLog, ...state.logs].slice(0, 100) };
+    }
+
+    return {
+      ...state,
+      market: newMarket,
+      lastUpdate: Date.now(),
+      sync_id: payload.sync_id || state.sync_id
+    };
+  }),
+
+  // 🔱 [PHASE 17] Patch a single symbol's signal from the /preview API.
+  // Called after a successful pre-trade simulate so SymbolIntel stops showing COMPUTING.
+  patchSignal: (symbol, signalPatch) => set((state) => {
+    const key = symbol.split('.')[0].trim().toUpperCase();
+    const existing = state.market[key];
+    if (!existing) return state;
+    return {
+      ...state,
+      market: {
+        ...state.market,
+        [key]: {
+          ...existing,
+          signal: {
+            ...(existing.signal || {}),
+            ...signalPatch,
+            status: 'READY'   // ← always mark READY so isLoading clears
+          }
+        }
+      }
+    };
+  }),
+
+  setHealth: (health) => set((state) => ({
+    health: { ...state.health, ...health },
+    // 🛡️ globalLatency is what Navbar reads — keep it in sync with health.latency
+    ...(health.latency !== undefined ? { globalLatency: health.latency } : {})
+  }))
+}));

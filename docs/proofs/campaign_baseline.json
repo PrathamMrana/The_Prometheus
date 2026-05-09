@@ -1,0 +1,31 @@
+{
+  "campaign_id": "PROMETHEUS_V5_EMPIRICAL_VALIDATION_001",
+  "timestamp_utc": "2026-05-08T05:10:00.000Z",
+  "status": "RESEARCH_CAMPAIGN_ACTIVE",
+  "strategy_version_id": "v5.6.0-HARDENED",
+  "config_sha256": "375f50583e30c458baa72e41f657d17242b9a35ab84bd5f11aa1ef5334f8f932",
+  "deployment_score": "PENDING_500_TRADES",
+  "calibration_baseline": {
+    "ece_baseline": 0.0,
+    "brier_score_baseline": 0.0,
+    "calibration_drift_tolerance": 0.15
+  },
+  "adversarial_baseline": {
+    "latency_injection_ms": 0,
+    "slippage_multiplier": 1.0,
+    "false_discovery_baseline_pbo": 0.0
+  },
+  "infrastructure_baseline": {
+    "heap_baseline_mb": "NOMINAL",
+    "watchdog_status": "ONLINE",
+    "replay_integrity_verified": true,
+    "log_append_verified": true
+  },
+  "trade_state": {
+    "total_trades_executed": 0,
+    "lifetime_expectancy": 0.0,
+    "profit_factor": 1.0,
+    "drawdown_pct": 0.0,
+    "contaminated": false
+  }
+}

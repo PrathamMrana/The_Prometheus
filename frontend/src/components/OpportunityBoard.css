@@ -1,0 +1,189 @@
+/* 🔱 [PHASE 20] OpportunityBoard Styles — Institutional Dark Terminal */
+
+.ob-container {
+    background: rgba(10, 12, 20, 0.92);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'Inter', 'Courier New', monospace;
+    backdrop-filter: blur(8px);
+    margin-bottom: 20px;
+}
+
+.ob-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding-bottom: 10px;
+}
+
+.ob-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+}
+
+.ob-status {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.ob-status--live    { background: rgba(0,255,100,0.12); color: #4ade80; border: 1px solid #4ade8040; }
+.ob-status--waiting { background: rgba(255,255,255,0.05); color: #888; border: 1px solid #ffffff15; }
+
+.ob-count {
+    margin-left: auto;
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+}
+
+/* Column header row */
+.ob-cols {
+    display: grid;
+    grid-template-columns: 28px 90px 1fr 48px 50px 110px 110px;
+    gap: 0 10px;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+    padding: 0 6px 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    margin-bottom: 4px;
+}
+
+/* Data rows */
+.ob-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ob-row {
+    display: grid;
+    grid-template-columns: 28px 90px 1fr 48px 50px 110px 110px;
+    gap: 0 10px;
+    align-items: center;
+    padding: 7px 6px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ob-row:hover {
+    background: rgba(255,255,255,0.04) !important;
+}
+
+.ob-row--top {
+    border-color: rgba(255,255,255,0.06);
+}
+
+/* Cells */
+.ob-rank {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.3);
+    text-align: center;
+}
+
+.ob-symbol {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ob-star {
+    font-size: 8px;
+    color: #facc15;
+}
+
+.ob-conf-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.ob-conf-val {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.ob-bar-track {
+    height: 3px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.ob-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.ob-grade {
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    padding: 1px 6px;
+    border-radius: 3px;
+    border: 1px solid;
+    letter-spacing: 0.06em;
+}
+
+.ob-score {
+    font-size: 10px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 600;
+}
+
+.ob-sm {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+}
+
+.ob-decision {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 2px 7px;
+    border-radius: 3px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.ob-decision--strong-long              { background: rgba(0,255,179,0.15); color: #00ffb3; }
+.ob-decision--early-accumulation       { background: rgba(74,222,128,0.12); color: #4ade80; }
+.ob-decision--breakout-unconfirmed,
+.ob-decision--watchlist-only,
+.ob-decision--wait-for-confirmation    { background: rgba(250,204,21,0.10); color: #facc15; }
+.ob-decision--weak-structure,
+.ob-decision--momentum-fade,
+.ob-decision--flow-conflict            { background: rgba(249,115,22,0.08); color: #f97316; }
+.ob-decision--strong-short,
+.ob-decision--poor-risk-reward,
+.ob-decision--low-conviction,
+.ob-decision--liquidity-unfavorable,
+.ob-decision--no-trade-zone            { background: rgba(239,68,68,0.08); color: #ef4444; }
+
+.ob-empty {
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    text-align: center;
+    padding: 24px 0;
+    letter-spacing: 0.1em;
+}

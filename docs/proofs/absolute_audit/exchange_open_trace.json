@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-05-08T08:07:34.091Z",
+  "burst": {
+    "size": 100,
+    "durationMs": 11224,
+    "successRate": "100%"
+  },
+  "engineState": "OPERATIONAL"
+}

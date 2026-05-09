@@ -1,0 +1,30 @@
+{
+  "weights": {
+    "trend": 35,
+    "momentum": 30,
+    "volume": 10,
+    "sectorFlow": 20,
+    "breakout": 5
+  },
+  "lastUpdated": "2026-05-07T15:18:01.124Z",
+  "generation": 726,
+  "sectorBlacklist": [
+    "UNKNOWN"
+  ],
+  "badPatterns": {
+    "falseConviction": false
+  },
+  "winningPatterns": {
+    "highConfWR": 0,
+    "lowConfWR": 0,
+    "sectorWR": {
+      "UNKNOWN": 0
+    },
+    "breakoutWR": 0
+  },
+  "recentTrend": {
+    "last10WR": 0,
+    "isLosing": true,
+    "isWinning": false
+  }
+}

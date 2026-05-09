@@ -1,0 +1,307 @@
+/* 🔱 [PHASE 21] AuthPage — Institutional Dark Terminal */
+
+.ap-root {
+    position: fixed;
+    inset: 0;
+    background: #020509;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+/* Canvas */
+.ap-particle-canvas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* Grid */
+.ap-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+}
+
+/* Glow */
+.ap-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(220,160,40,0.06) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+/* Top bar */
+.ap-topbar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: rgba(2,5,9,0.6);
+    backdrop-filter: blur(20px);
+    z-index: 2;
+}
+
+.ap-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ap-logo-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #eef2ff;
+}
+
+.ap-logo-text span {
+    background: linear-gradient(90deg, #dca028, #f0bc4a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.ap-version {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1px;
+}
+
+/* Auth card */
+.ap-card {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 440px;
+    background: rgba(6,13,24,0.92);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    backdrop-filter: blur(32px);
+    box-shadow:
+        0 0 0 1px rgba(220,160,40,0.08) inset,
+        0 32px 80px rgba(0,0,0,0.6),
+        0 0 60px rgba(220,160,40,0.04);
+}
+
+/* Tabs */
+.ap-tabs {
+    display: flex;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.ap-tab {
+    flex: 1;
+    padding: 16px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.25s;
+    position: relative;
+    z-index: 1;
+}
+
+.ap-tab--active {
+    color: #dca028;
+}
+
+.ap-tab-indicator {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 50%; height: 1px;
+    background: linear-gradient(90deg, transparent, #dca028, transparent);
+    transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.ap-tab-indicator--right { left: 50%; }
+
+/* Form */
+.ap-form {
+    padding: 36px 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ap-form-header { margin-bottom: 4px; }
+
+.ap-form-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #eef2ff;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+.ap-form-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.5;
+}
+
+/* Input fields */
+.ap-field {
+    position: relative;
+    padding-top: 16px;
+}
+
+.ap-label {
+    position: absolute;
+    top: 16px; left: 0;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+.ap-field--active .ap-label {
+    top: 0;
+    font-size: 9px;
+    color: rgba(220,160,40,0.7);
+}
+
+.ap-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 0 6px;
+    font-size: 14px;
+    color: #eef2ff;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.ap-input::placeholder { color: transparent; }
+
+.ap-field-line {
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 1px; width: 0;
+    background: linear-gradient(90deg, #dca028, #f0bc4a);
+    transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.ap-field-line--focused { width: 100%; }
+
+/* Error */
+.ap-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(255,59,107,0.08);
+    border: 1px solid rgba(255,59,107,0.2);
+    border-radius: 4px;
+    font-size: 12px;
+    color: #ff7a9a;
+    overflow: hidden;
+}
+
+.ap-error-icon {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+/* Submit button */
+.ap-submit {
+    padding: 15px;
+    background: #dca028;
+    color: #020509;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    margin-top: 4px;
+}
+
+.ap-submit:hover:not(:disabled) {
+    background: #f0bc4a;
+    box-shadow: 0 0 40px rgba(220,160,40,0.5), 0 4px 20px rgba(220,160,40,0.25);
+    transform: translateY(-1px);
+}
+
+.ap-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Spinner */
+.ap-spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-top-color: #020509;
+    border-radius: 50%;
+    animation: ap-spin 0.7s linear infinite;
+}
+@keyframes ap-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Switch mode */
+.ap-switch {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+}
+.ap-switch button {
+    background: none;
+    border: none;
+    color: #dca028;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    transition: color 0.2s;
+}
+.ap-switch button:hover { color: #f0bc4a; }
+
+/* Disclaimer */
+.ap-disclaimer {
+    position: absolute;
+    bottom: 24px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 0.5px;
+    font-family: 'IBM Plex Mono', monospace;
+    text-align: center;
+    padding: 0 40px;
+    z-index: 2;
+}

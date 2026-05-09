@@ -1,0 +1,25 @@
+{
+  "name": "the_prometheus",
+  "version": "1.0.0",
+  "description": "> *AI-powered LSTM stock prediction platform for NSE/BSE markets. Looks like a $10M Bloomberg Terminal replacement.*",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd frontend && npm run dev",
+    "kill-port": "kill -9 $(lsof -t -i:3000,3001,3002,5173) 2>/dev/null; echo 'Ports cleared'",
+    "server": "node --inspect --expose-gc --max-old-space-size=2048 server/index.js",
+    "dev": "npm run kill-port && concurrently \"npm run server\" \"npm run start\"",
+    "build": "react-scripts build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.13.6",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "node-fetch": "^2.7.0",
+    "p-limit": "^3.1.0"
+  }
+}

@@ -1,0 +1,196 @@
+/* 🔱 [PHASE 21] BootSequence Styles */
+
+.boot-root {
+    position: fixed;
+    inset: 0;
+    background: #020509;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9998;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+.boot-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+}
+
+.boot-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(220,160,40,0.05) 0%, transparent 65%);
+    pointer-events: none;
+}
+
+.boot-terminal {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 680px;
+    background: rgba(6,13,24,0.96);
+    border: 1px solid rgba(220,160,40,0.18);
+    border-radius: 6px;
+    padding: 32px;
+    box-shadow:
+        0 0 0 1px rgba(220,160,40,0.06) inset,
+        0 40px 100px rgba(0,0,0,0.7),
+        0 0 80px rgba(220,160,40,0.06);
+    backdrop-filter: blur(20px);
+}
+
+.boot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.boot-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.boot-logo-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    background: linear-gradient(90deg, #dca028, #f0bc4a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.boot-logo-sub {
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 2px;
+    margin-top: 3px;
+}
+
+.boot-user {
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1.5px;
+    text-align: right;
+}
+
+.boot-user span {
+    color: #dca028;
+}
+
+.boot-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(220,160,40,0.2), transparent);
+    margin-bottom: 20px;
+}
+
+.boot-log {
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.boot-line {
+    font-size: 12px;
+    color: rgba(255,255,255,0);
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+}
+
+.boot-line--visible {
+    color: rgba(255,255,255,0.45);
+}
+
+.boot-line--accent {
+    color: rgba(220,160,40,0);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.boot-line--accent.boot-line--visible {
+    color: #dca028;
+}
+
+.boot-prompt {
+    color: rgba(220,160,40,0.4);
+    font-size: 9px;
+    flex-shrink: 0;
+}
+
+.boot-cursor {
+    color: #dca028;
+    animation: boot-blink 0.8s step-end infinite;
+    font-size: 14px;
+    line-height: 1;
+}
+
+@keyframes boot-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.boot-progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    margin-top: 16px;
+}
+
+.boot-progress-track {
+    height: 2px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 1px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.boot-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #8a6010, #dca028, #f0bc4a);
+    border-radius: 1px;
+    box-shadow: 0 0 10px rgba(220,160,40,0.4);
+}
+
+.boot-status-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 9px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.boot-status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #00e896;
+    box-shadow: 0 0 8px rgba(0,232,150,0.6);
+    animation: boot-pulse 2s ease infinite;
+    flex-shrink: 0;
+}
+
+@keyframes boot-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.boot-status-sep {
+    color: rgba(255,255,255,0.1);
+}

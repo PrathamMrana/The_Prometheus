@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./server
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - DB_TYPE=sqlite
+      - BROKER_MODE=SIMULATION
+    volumes:
+      - ./server/data:/app/data
+    restart: always
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always

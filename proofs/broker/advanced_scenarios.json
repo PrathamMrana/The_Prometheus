@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-05-08T08:06:25.567Z",
+  "partialFill": {
+    "order_id": "BRK_ba1e27ce",
+    "exchange_timestamp": "2026-05-08T08:06:25.301Z",
+    "status": "PARTIAL_FILL",
+    "average_price": 3500,
+    "filled_quantity": 10,
+    "total_quantity": 20,
+    "symbol": "TCS.NS",
+    "side": "BUY"
+  },
+  "rejection": {
+    "status": "REJECTED",
+    "reason": "INSUFFICIENT_MARGIN"
+  },
+  "cancellation": {
+    "status": "CANCELLED",
+    "order_id": "BRK_123456"
+  }
+}

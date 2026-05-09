@@ -1,0 +1,22 @@
+
+======================================================
+🔱 PROMETHEUS DETERMINISTIC REPLAY ENGINE
+======================================================
+[INFO] Replaying ledger: /Users/prathamrana/Desktop/The_Prometheus/proofs/replay/frozen_ledger.jsonl
+[INFO] Loaded 8814 total events. (0 corrupt lines dropped).
+[INFO] Fast-Forwarding: Latest PORTFOLIO_SNAPSHOT found at event 73f558e5-879b-48f7-bcbe-59077118540e
+[INFO] Incremental events to replay: 24
+
+======================================================
+📊 RECONSTRUCTED PORTFOLIO STATE
+======================================================
+Cash Remaining: $100000.00
+Realized PnL:   $0.00
+Gross Exposure: $0.00
+Trade Count:    0
+
+Open Positions (0):
+
+[INFO] Replay completed in 0.742 ms.
+======================================================
+

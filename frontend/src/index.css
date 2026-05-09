@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #060606;
+  --color-card: rgba(255, 255, 255, 0.03);
+  --color-border: rgba(255, 255, 255, 0.05);
+  --color-gold: #dca028;
+  --color-muted: rgba(255, 255, 255, 0.4);
+  --color-bull: #00e896;
+  --color-bear: #ff3b6b;
+
+  --font-syne: "Syne", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --font-inter: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
+  color: white;
+  font-family: var(--font-inter);
+  overflow-x: hidden;
+}
+
+/* Glassmorphism primitives */
+.glass {
+  @apply bg-card border border-border backdrop-blur-xl;
+}
+
+.glass-link {
+  @apply hover:bg-white/5 transition-all duration-300;
+}
+
+/* Animations */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  animation: ticker-scroll 60s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px currentColor); }
+  50% { opacity: 0.6; filter: drop-shadow(0 0 2px currentColor); }
+}
+
+.animate-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

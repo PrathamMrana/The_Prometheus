@@ -1,0 +1,14 @@
+[
+  {
+    "symbol": "TCS.NS",
+    "brokerId": "BROKER_369b4980",
+    "drift": 0,
+    "status": "RECONCILED"
+  },
+  {
+    "symbol": "RELIANCE.NS",
+    "brokerId": "BROKER_409dbd8e",
+    "drift": 0,
+    "status": "RECONCILED"
+  }
+]

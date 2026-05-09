@@ -1,0 +1,10 @@
+{
+  "totalTrades": 210,
+  "winRate": 6.666666666666667,
+  "avgReturn": 0.006767727516059898,
+  "winningSignals": {
+    "MANUAL_ENTRY": 5,
+    "undefined": 9
+  },
+  "totalPnL": 1.4212227783725786
+}

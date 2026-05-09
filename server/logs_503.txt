@@ -1,0 +1,764 @@
+
+> the_prometheus@1.0.0 start
+> cd frontend && npm run dev
+
+
+> frontend@0.0.0 dev
+> vite
+
+
+  VITE v8.0.3  ready in 244 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+12:46:12 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:46:12 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:46:12 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:46:12 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:46:13 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:16 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:20 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:22 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:46:22 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:46:24 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:27 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (15s).
+12:46:29 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:32 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (20s).
+12:46:32 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:46:32 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:46:36 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:37 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (25s).
+12:46:40 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:46:40 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:46:40 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:46:40 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:46:41 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:44 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:47 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:50 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:46:50 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:46:52 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:52 AM [vite] (client) [console.error] Chart load failed: TypeError: Failed to fetch
+    at loadInitData (http://localhost:5173/src/components/terminal/ChartPanel.jsx:130:23)
+    at http://localhost:5173/src/components/terminal/ChartPanel.jsx:170:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:46:52 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:46:52 AM [vite] (client) [console.error] Chart load failed: TypeError: Failed to fetch
+    at loadInitData (http://localhost:5173/src/components/terminal/ChartPanel.jsx:130:23)
+    at http://localhost:5173/src/components/terminal/ChartPanel.jsx:170:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+12:46:52 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:46:52 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:46:52 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:46:53 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:56 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:46:57 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:46:57 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:46:57 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:46:57 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:46:58 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:01 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:05 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:07 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:47:07 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:47:09 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:12 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (15s).
+12:47:14 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:17 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (20s).
+12:47:17 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:47:17 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:47:19 AM [vite] (client) [console.error] Chart load failed: TypeError: Failed to fetch
+    at loadInitData (http://localhost:5173/src/components/terminal/ChartPanel.jsx:130:23)
+    at http://localhost:5173/src/components/terminal/ChartPanel.jsx:170:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:47:19 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:47:19 AM [vite] (client) [console.error] Chart load failed: TypeError: Failed to fetch
+    at loadInitData (http://localhost:5173/src/components/terminal/ChartPanel.jsx:130:23)
+    at http://localhost:5173/src/components/terminal/ChartPanel.jsx:170:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+12:47:19 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:47:19 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:47:19 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:47:20 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:23 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:25 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:47:25 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:47:25 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:47:25 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:47:26 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:29 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:33 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:35 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:47:35 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:47:37 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:40 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (15s).
+12:47:42 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:45 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (20s).
+12:47:45 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:47:45 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:47:48 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:47:50 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (25s).
+12:47:55 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (30s).
+12:47:55 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:47:55 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:47:56 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:00 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (35s).
+12:48:00 AM [vite] (client) [console.error] Chart load failed: TypeError: Failed to fetch
+    at loadInitData (http://localhost:5173/src/components/terminal/ChartPanel.jsx:130:23)
+    at http://localhost:5173/src/components/terminal/ChartPanel.jsx:170:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:48:00 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:48:00 AM [vite] (client) [console.error] Chart load failed: TypeError: Failed to fetch
+    at loadInitData (http://localhost:5173/src/components/terminal/ChartPanel.jsx:130:23)
+    at http://localhost:5173/src/components/terminal/ChartPanel.jsx:170:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+12:48:00 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:48:00 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:48:00 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:48:01 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:04 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:08 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:08 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:48:08 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:48:08 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:48:08 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:48:09 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:12 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:15 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/pages/Portfolio.jsx:15:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7621:6)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:48:15 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:48:15 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/pages/Portfolio.jsx:15:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+12:48:15 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:48:15 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:48:15 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:48:16 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:19 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:22 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:48:22 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:48:22 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:48:22 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:48:23 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:26 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:29 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:32 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:48:32 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:48:34 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:36 AM [vite] (client) [console.error] Chart load failed: TypeError: Failed to fetch
+    at loadInitData (http://localhost:5173/src/components/terminal/ChartPanel.jsx:130:23)
+    at http://localhost:5173/src/components/terminal/ChartPanel.jsx:170:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:48:36 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:48:36 AM [vite] (client) [console.error] Chart load failed: TypeError: Failed to fetch
+    at loadInitData (http://localhost:5173/src/components/terminal/ChartPanel.jsx:130:23)
+    at http://localhost:5173/src/components/terminal/ChartPanel.jsx:170:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+12:48:36 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:48:36 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:48:36 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:48:37 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:40 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:44 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:46 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:48:46 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:48:48 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:51 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (15s).
+12:48:53 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:48:56 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (20s).
+12:48:56 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:48:56 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:48:59 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:49:01 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (25s).
+12:49:06 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (30s).
+12:49:06 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:49:06 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:49:07 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:49:11 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (35s).
+12:49:16 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:49:16 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (40s).
+12:49:16 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:49:16 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:49:21 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (45s).
+12:49:26 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (50s).
+12:49:26 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:49:26 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/App.jsx:45:5
+12:49:27 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:49:31 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (55s).
+12:49:33 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:49:33 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:49:33 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:49:33 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:49:34 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:49:37 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:49:39 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/components/shared/PortfolioSummary.jsx:16:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:49:39 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+12:49:39 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/components/shared/PortfolioSummary.jsx:16:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+12:49:39 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+12:49:39 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:49:39 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+12:49:40 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+12:49:43 AM [vite] (client) [console.error] ❌ WS ERROR: {"isTrusted":true}
+1:03:13 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/components/shared/PortfolioSummary.jsx:16:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+1:03:13 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+1:03:13 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/components/shared/PortfolioSummary.jsx:16:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+1:03:13 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+1:03:13 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+1:03:13 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+1:04:39 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/components/shared/PortfolioSummary.jsx:16:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+1:04:39 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7617:22)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+    at commitPassiveMountOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7671:14)
+    at recursivelyTraversePassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7605:5)
+1:04:39 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at http://localhost:5173/src/components/shared/PortfolioSummary.jsx:16:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+1:04:39 AM [vite] (client) [console.error] [BOOT] Intelligence Sync Failed: TypeError: Failed to fetch
+    at boot (http://localhost:5173/src/App.jsx:30:23)
+    at http://localhost:5173/src/App.jsx:48:3
+    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:12903:13)
+    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:850:66)
+    at commitHookEffectListMount (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6616:153)
+    at commitHookPassiveMountEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:6651:55)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7700:6)
+    at recursivelyTraverseReconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7687:5)
+    at reconnectPassiveEffects (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:7712:14)
+    at doubleInvokeEffectsOnFiber (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=0e9c72aa:8923:125)
+1:04:39 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+1:04:39 AM [vite] (client) [console.error] [TRADE_STORE] Fetch Error: TypeError: Failed to fetch
+    at fetchPortfolio (http://localhost:5173/src/store/tradeStore.js:58:23)
+    at boot (http://localhost:5173/src/App.jsx:42:4)
+8:18:20 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (18918s).
+8:18:22 AM [vite] (client) [console.error] ⚠ [FAILSAFE] DATA STALLED (18920s).

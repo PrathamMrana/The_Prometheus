@@ -1,0 +1,51 @@
+{
+  "admin@prometheus.ai": {
+    "id": 1,
+    "email": "admin@prometheus.ai",
+    "name": "Admin User",
+    "passwordHash": "$2b$12$0zlnenNZIQBi2rJi064VDOW4meVcXQyrXXCmJxvImOwNJ6tR9jlNW",
+    "createdAt": 1778220913176
+  },
+  "test@test.com": {
+    "id": 2,
+    "email": "test@test.com",
+    "name": "Test User",
+    "passwordHash": "$2b$12$TgrPhqOVS8HTZof7cdQF/ukLX1trCfEET3RtkLTLCNz2kqVjJF.lm",
+    "createdAt": 1778222214832
+  },
+  "test2@test.com": {
+    "id": 3,
+    "email": "test2@test.com",
+    "name": "Test User",
+    "passwordHash": "$2b$12$FQYPxTD2YsYPKzBrN9/jGOU55TZSsxKQXkfyy8OqcFLot5u8Rkduq",
+    "createdAt": 1778226782692
+  },
+  "tester@example.com": {
+    "id": 4,
+    "email": "tester@example.com",
+    "name": "Tester",
+    "passwordHash": "$2b$12$iMD7yczoNKhRExEaBghpru6FG.R9BRuza6VgthTvHEYBaq1xlyEIC",
+    "createdAt": 1778230176376
+  },
+  "prathamrana186@gmail.com": {
+    "id": 5,
+    "email": "prathamrana186@gmail.com",
+    "name": "Pratham Rana",
+    "passwordHash": "$2b$12$JSMWyi75nvVTYw1ttvdppesq4MoHq/FabZy0jv4b4.GhAP6xHp/kG",
+    "createdAt": 1778239700457
+  },
+  "pilot@prometheus.io": {
+    "id": 6,
+    "email": "pilot@prometheus.io",
+    "name": "Institutional Pilot",
+    "passwordHash": "$2b$12$ObZysxFbtkxREsSyDGLj0.kZoonu5.osG40nUsjmSN8ualdn0560S",
+    "createdAt": 1778240014291
+  },
+  "manishrana186@gmail.com": {
+    "id": 7,
+    "email": "manishrana186@gmail.com",
+    "name": "Manish Rana",
+    "passwordHash": "$2b$12$8BZ1Lm8fKOhQ3IBM/EOJeORhsZ/F.oLIgqDM5SF98fAYFTCSMv1pi",
+    "createdAt": 1778300019597
+  }
+}

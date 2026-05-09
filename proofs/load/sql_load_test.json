@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-05-08T11:00:51.768Z",
+  "load": {
+    "size": 1000,
+    "durationMs": 20594,
+    "tps": 48.557832378362626
+  },
+  "engine": "SQL_OPERATIONAL"
+}
