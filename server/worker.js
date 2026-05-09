@@ -612,8 +612,11 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                     const entry = portfolioCache.get(canonical);
                     if (!entry) return;
 
+                    // 🔱 [FIX] Consume the tick to prevent infinite pipeline stall
+                    tickCoalescer.consume(canonical);
+
                     const finalPrice = entry.price;
-                    const percent = entry.percent;
+                    const percent = entry.percent || entry.pct_change || 0; // Schema safety
                     const prevClose = entry.prevClose;
 
                     let status = "NO_DATA";

@@ -95,6 +95,7 @@ class YFinanceAdapter extends BaseAdapter {
                             high: data.high,
                             low: data.low,
                             percent: data.pct_change,
+                            pct_change: data.pct_change, // 🔱 [FIX] Map both for schema safety
                             prevClose: data.prev_close,
                             priority: data.priority || "NORMAL",
                             volume: data.volume,
