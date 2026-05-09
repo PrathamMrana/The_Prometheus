@@ -16,6 +16,13 @@
 
 <br />
 
+## Live Demo
+
+- **Frontend:** https://your-vercel-link.vercel.app  
+- **Backend/API:** https://your-render-link.onrender.com
+
+---
+
 ## Platform Preview
 
 ![Prometheus Demo](./assets/prometheus-demo.gif)
