@@ -93,7 +93,8 @@ router.post('/order', async (req, res) => {
         const avgVolume = history.slice(-20).reduce((a, b) => a + (b.volume || 0), 0) / 20;
 
         const portfolio = PortfolioManager.load();
-        const existingPosition = portfolio.holdings[symbol] || portfolio.holdings[symbol.replace('.NS', '')];
+        const holdings = portfolio?.holdings || {};
+        const existingPosition = holdings[symbol] || holdings[symbol.replace('.NS', '')];
         
         let previousSignal = StrategyManager.getLastSignal(symbol);
         if (previousSignal === "HOLD") {
@@ -356,12 +357,12 @@ router.get('/portfolio', (req, res) => {
 
         res.json({
             success: true,
-            balance: portfolio.balance,
-            lockedBalance: portfolio.lockedBalance,
-            realizedPnL: portfolio.realizedPnL,
+            balance: portfolio.balance || 0,
+            lockedBalance: portfolio.lockedBalance || 0,
+            realizedPnL: portfolio.realizedPnL || 0,
             holdings: enrichedHoldings,
-            pendingOrders: portfolio.pendingOrders,
-            orders: portfolio.orders.slice(-100)
+            pendingOrders: portfolio.pendingOrders || [],
+            orders: (portfolio.orders || []).slice(-100)
         });
     } catch (err) {
         console.error("[EXECUTION API] Portfolio Error:", err.message);

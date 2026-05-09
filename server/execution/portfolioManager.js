@@ -18,8 +18,9 @@ class PortfolioManager {
         let totalValue = portfolio.balance + (portfolio.lockedBalance || 0);
         let unrealizedPnL = 0;
         const processedHoldings = [];
+        const holdings = portfolio?.holdings || {};
 
-        for (const [symbol, holding] of Object.entries(portfolio.holdings)) {
+        for (const [symbol, holding] of Object.entries(holdings)) {
             const currentPriceData = priceCache.get(symbol) || priceCache.get(symbol + ".NS");
             const currentPrice = currentPriceData ? currentPriceData.price : holding.avgPrice;
             const currentValue = holding.qty * currentPrice;

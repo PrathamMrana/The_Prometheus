@@ -30,26 +30,40 @@ class DBProvider {
         }
 
         const row = this.db.prepare('SELECT * FROM portfolio LIMIT 1').get();
-        const holdingsRows = this.db.prepare('SELECT * FROM holdings').all();
+        if (!row) {
+            console.warn("⚠️ [DATABASE] No portfolio row found. Returning default state.");
+            return {
+                balance: 1000000,
+                lockedBalance: 0,
+                realizedPnL: 0,
+                holdings: {},
+                orders: []
+            };
+        }
+
+        const holdingsRows = this.db.prepare('SELECT * FROM holdings').all() || [];
         
         const holdings = {};
         holdingsRows.forEach(h => {
             holdings[h.symbol] = {
-                qty: h.qty,
-                avgPrice: h.avg_price,
-                totalCost: h.total_cost,
-                lockedQty: h.locked_qty
+                qty: h.qty || 0,
+                avgPrice: h.avg_price || 0,
+                totalCost: h.total_cost || 0,
+                lockedQty: h.locked_qty || 0
             };
         });
 
-        const orders = this.db.prepare('SELECT * FROM orders ORDER BY timestamp DESC').all();
+        const orders = this.db.prepare('SELECT * FROM orders ORDER BY timestamp DESC').all() || [];
 
         const state = {
-            balance: row.balance,
-            lockedBalance: row.locked_balance,
-            realizedPnL: row.realized_pnl,
+            balance: row.balance || 0,
+            lockedBalance: row.locked_balance || 0,
+            realizedPnL: row.realized_pnl || 0,
             holdings,
-            orders: orders.map(o => ({ ...o, metadata: JSON.parse(o.metadata || '{}') }))
+            orders: orders.map(o => ({ 
+                ...o, 
+                metadata: JSON.parse(o.metadata || '{}') 
+            }))
         };
 
         this._cache = state;
