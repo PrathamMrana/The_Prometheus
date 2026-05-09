@@ -39,9 +39,38 @@ function init(server) {
     wss = new WebSocketServer({ 
         server, 
         path: '/ws',
-        verifyClient: (info, done) => {
-            // [PHASE 11] DEVELOPMENT OVERRIDE: Allow all local origins to restore live sync
-            done(true);
+        verifyClient: (info, callback) => {
+            // 🛡️ [PHASE 21] CORS Guard for WebSockets
+            const origin = info.origin || info.req.headers.origin;
+            const allowedOrigins = [
+                "http://localhost:5173",
+                "https://the-prometheus.vercel.app"
+            ];
+            
+            if (origin && !allowedOrigins.includes(origin) && !origin.endsWith(".vercel.app")) {
+                console.warn(`[WS REJECT] Unauthorized origin: ${origin} (Allowed: ${allowedOrigins.join(', ')})`);
+                return callback(false, 403, "Unauthorized Origin");
+            }
+
+            // 🛡️ [PHASE 21] JWT Auth Handshake
+            const url = new URL(info.req.url, `http://${info.req.headers.host}`);
+            const token = url.searchParams.get('token');
+            
+            if (!token) {
+                console.warn(`[WS REJECT] Missing auth token in handshake from origin: ${origin}`);
+                return callback(false, 401, "Unauthorized: Token Missing");
+            }
+
+            try {
+                const jwt = require('jsonwebtoken');
+                const ACCESS_SECRET = process.env.JWT_SECRET || 'prometheus_jwt_secret_2026_institutional';
+                const user = jwt.verify(token, ACCESS_SECRET);
+                console.log(`[WS ACCEPT] Authenticated: ${user.email} (${origin})`);
+                callback(true);
+            } catch (err) {
+                console.warn(`[WS REJECT] Invalid token from origin: ${origin}. Error: ${err.message}`);
+                callback(false, 401, "Unauthorized: Invalid Token");
+            }
         }
     });
     console.log('[REAL-TIME] WebSocket Hub Multiplexed & Hardened (Path: /ws)');
@@ -189,7 +218,6 @@ function syncOnConnect(ws, req) {
             }, 150 + (i * 20)); 
             ws._syncTimeouts.push(tId);
         }
-
         console.log(`[SOCKET] Chunked Sync Pipeline Armed for ${ip}`);
     } catch (err) {
         console.error(`[SNAPSHOT ERROR] ${ip}: ${err.message}`);
