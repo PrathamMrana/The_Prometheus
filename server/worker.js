@@ -1026,9 +1026,14 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                 // Throttled to every 10 cycles, but FORCED on first cycle (0) to ensure immediate UI hydration.
                 if (SYSTEM_STATE.CYCLE_COUNT === 0 || SYSTEM_STATE.CYCLE_COUNT % 10 === 0) {
                     console.log(`🚀 [SYNC] Broadcasting full STATE snapshot (Cycle: ${SYSTEM_STATE.CYCLE_COUNT})`);
+                    // 🔱 [PHASE 21 FIX] Ensure symbols are mapped into the objects so marketStore can identify them
+                    const snapshot = Array.from(portfolioCache.entries()).map(([symbol, data]) => ({
+                        ...data,
+                        symbol: symbol
+                    }));
                     broadcast({
                         type: "STATE",
-                        data: Array.from(portfolioCache.values()),
+                        data: snapshot,
                         sync_id: syncCoordinator.getSyncId(),
                         timestamp: now
                     });
