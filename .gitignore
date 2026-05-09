@@ -129,12 +129,18 @@ DerivedData
 *.swo
 
 # Prometheus custom cache and temp files
-__pycache__
+__pycache__/
 tmp/
 scratch/
-yfinance.cache
+*.cache
 .prometheus_cache.json
 debug/
-tests/
 archive/
-*.cache
+
+# Prometheus dynamic runtime data (regenerated on start - never commit)
+data/cycle_archive.json
+data/lkg_cache.json
+data/signal_archive.json
+proofs/soak/soak_24h_report.jsonl
+server/data/execution_ledger.jsonl
+server/lkg_cache.json
