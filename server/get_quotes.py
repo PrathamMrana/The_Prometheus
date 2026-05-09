@@ -219,7 +219,7 @@ def fetch_symbols_data(symbols):
     official_quotes = fetch_quotes_api(symbols)
     
     # 🔱 Step 2: Historical/Detail Data (concurrent)
-    with ThreadPoolExecutor(max_workers=10) as executor:
+    with ThreadPoolExecutor(max_workers=2) as executor:
         results = list(executor.map(fetch_single_symbol, symbols))
         for res in results:
             if res:
