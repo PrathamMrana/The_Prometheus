@@ -1,10 +1,13 @@
 // 🔱 [PHASE 10.1] PRE-BIND PORT CLEAR — runs synchronously before anything else
-// Prevents EADDRINUSE crashes when restarting without explicit kill command.
-try {
-    const { execSync } = require('child_process');
-    const PORT_TO_CLEAR = process.env.PORT || 3001;
-    execSync(`lsof -ti:${PORT_TO_CLEAR} | xargs kill -9 2>/dev/null || true`, { shell: true, stdio: 'ignore' });
-} catch (_) { /* silent — port was already free */ }
+// Prevents EADDRINUSE crashes when restarting locally. 
+// DISABLED IN PRODUCTION to prevent permission errors on cloud platforms.
+if (process.env.NODE_ENV !== 'production') {
+    try {
+        const { execSync } = require('child_process');
+        const PORT_TO_CLEAR = process.env.PORT || 3001;
+        execSync(`lsof -ti:${PORT_TO_CLEAR} | xargs kill -9 2>/dev/null || true`, { shell: true, stdio: 'ignore' });
+    } catch (_) { /* silent — port was already free */ }
+}
 
 require('dotenv').config();
 const express = require('express');

@@ -46,9 +46,10 @@ function init(server) {
     console.log('[REAL-TIME] WebSocket Hub Multiplexed & Hardened (Path: /ws)');
 
     wss.on('connection', (ws, req) => {
-        const ip = req.socket.remoteAddress;
+        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
         console.log(`✅ [WS] CLIENT CONNECTED: ${ip} | Total: ${wss.clients.size}`);
         ws.isAlive = true;
+        ws._remoteAddress = ip; // Store for later logging
 
         ws.on('pong', () => { 
             ws.isAlive = true; 
@@ -66,8 +67,13 @@ function init(server) {
             console.error(`❌ [WS] CLIENT ERROR (${ip}):`, err.message);
         });
         
-        // 🔥 STEP 1: INITIAL DATA PUSH
-        syncOnConnect(ws);
+        try {
+            // 🔥 STEP 1: INITIAL DATA PUSH
+            syncOnConnect(ws, req);
+        } catch (err) {
+            console.error(`❌ [WS_SYNC_FATAL] Error during connection initialization:`, err.message);
+            ws.terminate();
+        }
     });
 
     // 🛡️ [STEP H] HARDENED HEARTBEAT (10s Ping + Liveness Validation)
@@ -99,7 +105,8 @@ function init(server) {
  * 🛡️ [STEP S] SNAPSHOT INTEGRITY HUB
  * Pushes exactly what is stored, filtered for corruption and stream death.
  */
-function syncOnConnect(ws) {
+function syncOnConnect(ws, req) {
+    const ip = ws._remoteAddress || (req ? (req.headers['x-forwarded-for'] || req.socket.remoteAddress) : 'UNKNOWN');
     try {
         const cache = Persistence.load();
         const sync_id = syncCoordinator.getSyncId();
@@ -140,11 +147,10 @@ function syncOnConnect(ws) {
         };
 
         // 🛡️ [PHASE 3.6.1] STAGGERED SNAPSHOT DELIVERY
-        // Chunking the 53-ticker snapshot prevents "Network process crashed" in Safari/WebKit
         const chunkSize = 10;
         const total = snapshot.length;
         
-        console.log(`[SOCKET] Initiating Chunked Sync (${total} tickers) for ${ws._socket.remoteAddress}`);
+        console.log(`[SOCKET] Initiating Chunked Sync (${total} tickers) for ${ip}`);
 
         ws._syncTimeouts = ws._syncTimeouts || [];
         for (let i = 0; i < total; i += chunkSize) {
@@ -159,15 +165,15 @@ function syncOnConnect(ws) {
                         data: chunk
                     }));
                 }
-            }, 150 + (i * 20)); // Staggered delay (base 150ms + 20ms per chunk)
+            }, 150 + (i * 20)); 
             ws._syncTimeouts.push(tId);
         }
 
-        console.log(`[SOCKET] Chunked Sync Pipeline Armed for ${ws._socket.remoteAddress}`);
+        console.log(`[SOCKET] Chunked Sync Pipeline Armed for ${ip}`);
     } catch (err) {
-        console.error(`[SNAPSHOT ERROR] ${ws._socket.remoteAddress}: ${err.message}`);
+        console.error(`[SNAPSHOT ERROR] ${ip}: ${err.message}`);
     }
-};
+}
 
 /**
  * 🛡️ [STEP B] BROADCAST ENGINE (CLEAN)
