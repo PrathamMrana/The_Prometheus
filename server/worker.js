@@ -1194,10 +1194,31 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
         process.exit(0);
     });
 
+    let isWarming = true;
+    console.log('🚀 [PHASE 21] INSTITUTIONAL WARMUP INITIATED...');
+    
+    // 🛡️ [STEP 1] Immediate Persistence Hydration
+    const cache = Persistence.load();
+    if (cache.size > 0) {
+        console.log(`✅ [WARMUP] Cache Hydrated: ${cache.size} symbols ready.`);
+        // Prime the priceHistory for all symbols to avoid Score 50 artifacts
+        for (const [sym, entry] of cache.entries()) {
+            if (entry.sparkline && entry.sparkline.length > 0) {
+                priceHistory.set(sym, entry.sparkline.map(p => ({
+                    close: p, high: p, low: p, volume: 0, timestamp: Date.now()
+                })));
+            }
+        }
+    } else {
+        console.warn('⚠️ [WARMUP] No LKG cache or bootstrap found. Starting from scratch.');
+    }
+
     if (universeArray.length === 0) {
         console.warn('⚠️ [EMPTY WATCHLIST] Sleeping 5s before retry...');
         setTimeout(start, 5000);
     } else {
+        isWarming = false;
+        console.log('🚀 [PHASE 21] WARMUP COMPLETE. Starting real-time engine.');
         runCycle();
     }
 }

@@ -1,0 +1,52 @@
+{
+  "NSEI": {
+    "symbol": "NSEI",
+    "price": 24184.75,
+    "percent": 0.45,
+    "pct_change": 0.45,
+    "status": "CLOSED",
+    "source": "LKG",
+    "sector": "INDEX",
+    "timestamp": 1746786000000
+  },
+  "BSESN": {
+    "symbol": "BSESN",
+    "price": 79486.5,
+    "percent": 0.42,
+    "pct_change": 0.42,
+    "status": "CLOSED",
+    "source": "LKG",
+    "sector": "INDEX",
+    "timestamp": 1746786000000
+  },
+  "RELIANCE": {
+    "symbol": "RELIANCE",
+    "price": 1426.4,
+    "percent": -0.15,
+    "pct_change": -0.15,
+    "status": "CLOSED",
+    "source": "LKG",
+    "sector": "ENERGY",
+    "timestamp": 1746786000000
+  },
+  "HDFCBANK": {
+    "symbol": "HDFCBANK",
+    "price": 780.2,
+    "percent": 0.12,
+    "pct_change": 0.12,
+    "status": "CLOSED",
+    "source": "LKG",
+    "sector": "BANKING",
+    "timestamp": 1746786000000
+  },
+  "INFY": {
+    "symbol": "INFY",
+    "price": 1179.2,
+    "percent": -0.05,
+    "pct_change": -0.05,
+    "status": "CLOSED",
+    "source": "LKG",
+    "sector": "IT",
+    "timestamp": 1746786000000
+  }
+}

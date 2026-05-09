@@ -26,12 +26,24 @@ class Persistence {
     static load() {
         if (sharedInstance) return sharedInstance;
 
+        const BOOTSTRAP_FILE = path.join(persistenceDir, 'bootstrap_snapshot.json');
+
         try {
+            // 🛡️ [PHASE 21] PRIMARY: Load Last Known Good state from disk
             if (fs.existsSync(CACHE_FILE)) {
                 const raw = fs.readFileSync(CACHE_FILE);
                 const obj = JSON.parse(raw);
                 sharedInstance = new Map(Object.entries(obj));
-                console.log(`📡 [PERSISTENCE] Cache Singleton Initialized: ${sharedInstance.size} symbols.`);
+                console.log(`📡 [PERSISTENCE] Cache Singleton Hydrated: ${sharedInstance.size} symbols.`);
+                return sharedInstance;
+            }
+
+            // 🛡️ [PHASE 21] SECONDARY: Fallback to baked-in bootstrap snapshot on cold starts (Render/New Deploy)
+            if (fs.existsSync(BOOTSTRAP_FILE)) {
+                const raw = fs.readFileSync(BOOTSTRAP_FILE);
+                const obj = JSON.parse(raw);
+                sharedInstance = new Map(Object.entries(obj));
+                console.log(`📡 [PERSISTENCE] Bootstrap Hydration Active: ${sharedInstance.size} symbols loaded.`);
                 return sharedInstance;
             }
         } catch (e) {

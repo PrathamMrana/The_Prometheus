@@ -41,6 +41,13 @@ export const HealthBanner = () => {
             text: 'text-bear font-bold',
             icon: AlertTriangle,
             msg: 'DATA CRITICAL: Primary and Secondary sources failing. System in RECOVERY_MODE.'
+        },
+        RECOVERING: {
+            bg: 'bg-gold/5',
+            border: 'border-gold/20',
+            text: 'text-gold',
+            icon: Database,
+            msg: 'TELEMETRY RECOVERY: Backend is hydrating from cached market snapshot. Live sync pending.'
         }
     };
 

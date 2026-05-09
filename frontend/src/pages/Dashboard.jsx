@@ -104,6 +104,8 @@ const IntelligenceStrip = () => {
     );
 };
 
+import { SystemHealthMonitor } from '../components/shared/SystemHealthMonitor';
+
 const AIExecutiveSummary = () => {
     const global = useMarketStore(state => state.global);
     const opportunityBoard = useMarketStore(state => state.opportunityBoard);
@@ -115,15 +117,15 @@ const AIExecutiveSummary = () => {
     const executionMode = threatLevel === 'Elevated' ? 'Defensive Mode' : 'Tactical Alpha';
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-6">
-            <div className="lg:col-span-3 glass p-5 rounded-sm border border-white/5 bg-gradient-to-br from-[#0a0a0c] to-[#121216]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-6">
+            <div className="lg:col-span-8 glass p-5 rounded-sm border border-white/5 bg-gradient-to-br from-[#0a0a0c] to-[#121216]">
                 <div className="flex items-center gap-3 mb-5 border-b border-white/5 pb-3">
                     <div className="p-1.5 bg-bull/10 rounded-sm">
                         <Activity size={14} className="text-bull" />
                     </div>
                     <h2 className="text-[11px] font-syne font-black tracking-[0.3em] uppercase text-white/90">AI Executive Summary</h2>
-                    <div className="ml-auto flex gap-2">
-                        <span className="px-2 py-0.5 rounded-sm bg-white/5 text-[8px] font-mono tracking-widest text-muted uppercase">SYS_HEALTH: OPTIMAL</span>
+                    <div className="ml-auto">
+                        <span className="px-2 py-0.5 rounded-sm bg-white/5 text-[8px] font-mono tracking-widest text-muted uppercase">SYS_TIME: {new Date().toLocaleTimeString('en-IN', { hour12: false })}</span>
                     </div>
                 </div>
                 
@@ -134,7 +136,7 @@ const AIExecutiveSummary = () => {
                     </div>
                     <div>
                         <div className="text-[9px] font-mono text-muted uppercase tracking-widest mb-1.5 flex items-center gap-1.5"><AlertTriangle size={10} className="text-bear"/> Primary Risk</div>
-                        <div className="text-xs font-mono font-bold text-bear/90 mt-1">Sector breadth decay / Weak volume</div>
+                        <div className="text-xs font-mono font-bold text-bear/90 mt-1">Sector breadth decay</div>
                     </div>
                     <div>
                         <div className="text-[9px] font-mono text-muted uppercase tracking-widest mb-1.5 flex items-center gap-1.5"><Zap size={10} className="text-bull"/> Top Conviction</div>
@@ -159,37 +161,18 @@ const AIExecutiveSummary = () => {
                 </div>
             </div>
 
-            {/* Why No Trade Panel */}
-            <div className="glass p-5 rounded-sm border-l-2 border-bear/60 bg-bear/[0.02] flex flex-col">
-                <div className="flex items-center gap-2 mb-4">
-                    <AlertTriangle size={14} className="text-bear" />
-                    <h2 className="text-[11px] font-syne font-black tracking-[0.2em] uppercase text-white/90">Trade Rejection Log</h2>
-                </div>
-                <div className="space-y-3 flex-1">
-                    <div className="flex items-start gap-2">
-                        <div className="mt-0.5 w-1.5 h-1.5 rounded-full bg-bear/60 shrink-0" />
-                        <div>
-                            <div className="text-[9px] font-mono text-white/80 uppercase font-bold">Weak Reward/Risk</div>
-                            <div className="text-[8px] font-mono text-muted uppercase mt-0.5">Edge fails to survive 2x slippage estimation.</div>
-                        </div>
+            {/* Health & Continuity Row (4/12) */}
+            <div className="lg:col-span-4 flex flex-col gap-4">
+                <SystemHealthMonitor />
+                <div className="glass p-4 rounded-sm border-l-2 border-bear/60 bg-bear/[0.02] flex-1">
+                    <div className="flex items-center gap-2 mb-3">
+                        <AlertTriangle size={12} className="text-bear" />
+                        <h2 className="text-[10px] font-syne font-black tracking-[0.2em] uppercase text-white/90">Signal Rejection</h2>
                     </div>
-                    <div className="flex items-start gap-2">
-                        <div className="mt-0.5 w-1.5 h-1.5 rounded-full bg-bear/60 shrink-0" />
-                        <div>
-                            <div className="text-[9px] font-mono text-white/80 uppercase font-bold">Sector Divergence</div>
-                            <div className="text-[8px] font-mono text-muted uppercase mt-0.5">Macro confirmation lagging peer averages.</div>
-                        </div>
+                    <div className="space-y-2">
+                        <div className="text-[8px] font-mono text-muted uppercase">94.2% of signals rejected for edge decay.</div>
+                        <div className="text-[8px] font-mono text-muted uppercase tracking-tighter">Monitoring institutional liquidity gates...</div>
                     </div>
-                    <div className="flex items-start gap-2">
-                        <div className="mt-0.5 w-1.5 h-1.5 rounded-full bg-bear/60 shrink-0" />
-                        <div>
-                            <div className="text-[9px] font-mono text-white/80 uppercase font-bold">Low Conviction</div>
-                            <div className="text-[8px] font-mono text-muted uppercase mt-0.5">Below required 75% regime threshold.</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="mt-4 pt-3 border-t border-bear/10 text-[8px] font-mono text-bear/60 italic tracking-wide">
-                    System rejecting 94.2% of signals to preserve capital.
                 </div>
             </div>
         </div>

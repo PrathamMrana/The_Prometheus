@@ -57,7 +57,13 @@ export const MicroHeatmap = () => {
                 className="grid gap-2 h-[400px] overflow-y-auto no-scrollbar pr-1 justify-center sm:justify-start"
                 style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 140px))' }}
             >
-                {heatmap.map(([key, val]) => {
+                {heatmap.length === 0 ? (
+                    <div className="col-span-full h-[300px] flex flex-col items-center justify-center border border-white/5 bg-white/[0.02] rounded-sm">
+                        <Database size={24} className="text-muted/20 mb-4 animate-pulse" />
+                        <span className="text-[10px] font-mono text-muted uppercase tracking-[0.2em]">Awaiting telemetry synchronization...</span>
+                        <span className="text-[8px] font-mono text-muted/50 uppercase mt-2">Hydrating from cached market snapshot</span>
+                    </div>
+                ) : heatmap.map(([key, val]) => {
                     const isActive = selectedSymbol === key || selectedSymbol === `${key}.NS`;
                     const price = Number(val?.price) || 0;
                     

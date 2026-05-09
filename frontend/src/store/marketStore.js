@@ -50,6 +50,12 @@ export const useMarketStore = create((set, get) => ({
       const feedDataAge  = g.feedDataAge  ?? state.feedDataAge;
       const allowEntry   = g.allowEntry   ?? state.allowEntry;
       const allowExit    = g.allowExit    ?? state.allowExit;
+      
+      // 🛡️ [PHASE 21] Sync Health with Feed Status
+      if (feedState === 'RECOVERING' || state.feedState === 'RECOVERING') {
+        g.data_health = 'RECOVERING';
+      }
+
       const isChanged = JSON.stringify(state.global) !== JSON.stringify(g);
       if (!isChanged && feedState === state.feedState) return state;
       return { ...state, global: g, feedState, feedDataAge, allowEntry, allowExit };
@@ -69,16 +75,17 @@ export const useMarketStore = create((set, get) => ({
 
     let newMarket = { ...state.market };
 
-    // 🔥 [FIX 1] PROPER STATE SNAPSHOT ARRAY
+    // 🔥 [PHASE 21] INSTITUTIONAL STATE RECOVERY
     if (payload.type === 'STATE') {
       const list = payload.data || [];
       const prices = payload.data?.prices || list;
-
-      if (list.anomalies) {
-        set((s) => ({ ...s, anomalies: list.anomalies }));
-      }
-
       const listToProcess = Array.isArray(prices) ? prices : Object.values(prices);
+
+      // 🛡️ [GRACEFUL DEGRADATION] If we receive an empty state but already have market data, 
+      // do NOT wipe the board. This prevents the "NO DATA" flicker during backend restarts.
+      if (listToProcess.length === 0 && Object.keys(state.market).length > 0) {
+        return { ...state, feedState: 'RECOVERING' };
+      }
 
       listToProcess.forEach((d) => {
         const rawSymbol = d.symbol || "";
@@ -91,9 +98,9 @@ export const useMarketStore = create((set, get) => ({
         // 🔒 [SAFE FALLBACK] Only trigger when Phase 17 pipeline hasn't produced signal yet.
         if (!d.signal) {
           d.signal = { 
-            status: "COMPUTING",
+            status: "Awaiting live telemetry synchronization",
             loading: true,
-            decision: "LOADING"
+            decision: "SYNCING"
           };
         }
 
@@ -102,7 +109,7 @@ export const useMarketStore = create((set, get) => ({
           rawSymbol: rawSymbol,
           currency: currency,
           price: d.price,
-          percent: d.percent,
+          percent: d.percent || 0,
           sparkline: d.sparkline || newMarket[key]?.sparkline || [],
           signal: d.signal,
           anomaly: d.anomaly || newMarket[key]?.anomaly || null,
@@ -113,6 +120,8 @@ export const useMarketStore = create((set, get) => ({
           status: d.status || "LIVE"
         };
       });
+
+      return { ...state, market: newMarket, feedState: 'LIVE' };
     }
 
     // ⚡ [FIX 2] SAFE TICK MERGE MAPPED FOR DELTAS
