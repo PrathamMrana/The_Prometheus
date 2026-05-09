@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: prometheus-api
+    runtime: node
+    plan: free
+    buildCommand: npm install && cd server && npm install && pip install -r requirements.txt
+    startCommand: node server/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: PYTHON_PATH
+        value: python3
+      - key: DB_TYPE
+        value: sqlite
+      - key: BROKER_MODE
+        value: SIMULATION
+      - key: VITE_API_URL
+        value: https://prometheus-api-zbgy.onrender.com # Self-reference or update as needed
+    healthCheckPath: /health
+    autoDeploy: true
