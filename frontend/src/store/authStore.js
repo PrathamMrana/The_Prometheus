@@ -5,7 +5,7 @@
  */
 import { create } from 'zustand';
 
-const API = 'http://localhost:3001';
+const API = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const ACCESS_KEY  = 'prometheus_access';
 const REFRESH_KEY = 'prometheus_refresh';
 const USER_KEY    = 'prometheus_user';
