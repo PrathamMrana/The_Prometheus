@@ -135,7 +135,7 @@ export const IndexCard = ({ symbol, label, market: marketType = 'IN', onSelect, 
         <PriceFlash value={safePrice} prefix={marketType === 'US' ? '$' : '₹'} />
       </div>
       <div className={`font-mono text-[11px] font-bold mt-1 flex items-center gap-1 ${isUp ? 'text-bull' : 'text-bear'}`}>
-        {safePercent !== null && !getSyncMessage(safePrice, stock?.prevClose) ? (
+        {safePercent !== null && !getSyncMessage(safePrice, stock?.prevClose, safePercent) ? (
           <>
             {isUp ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
             <span>
@@ -144,7 +144,7 @@ export const IndexCard = ({ symbol, label, market: marketType = 'IN', onSelect, 
           </>
         ) : (
           <span className="text-[7px] text-muted/40 uppercase tracking-widest animate-pulse">
-            {getSyncMessage(safePrice, stock?.prevClose) || "SYNCING..."}
+            {getSyncMessage(safePrice, stock?.prevClose, safePercent) || "SYNCING..."}
           </span>
         )}
       </div>

@@ -39,9 +39,11 @@ export const isBaselineFrozen = (status) => {
 
 /**
  * Returns a human-readable synchronization message if data is missing.
+ * 🔱 [PHASE 21] Resilience Hardening: Don't block UI if we have at least one valid delta.
  */
-export const getSyncMessage = (price, prevClose) => {
-    if (!price || !prevClose) {
+export const getSyncMessage = (price, prevClose, percent) => {
+    if (!price) return "Awaiting Price...";
+    if (!prevClose && !Number.isFinite(percent)) {
         return "Synchronizing market baseline...";
     }
     return null;

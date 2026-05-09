@@ -351,11 +351,11 @@ export const ChartPanel = () => {
             LIVE
           </div>
           <div className={`text-[10px] font-mono font-black ${isUp ? 'text-bull' : 'text-bear'}`}>
-            {!getSyncMessage(stock.price, stock.prevClose) ? (
+            {!getSyncMessage(stock.price, stock.prevClose, stock.percent) ? (
               `${isUp ? '+' : ''}${stock.percent?.toFixed(2)}%`
             ) : (
               <span className="text-[7px] text-muted/40 animate-pulse uppercase tracking-widest">
-                {getSyncMessage(stock.price, stock.prevClose)}
+                {getSyncMessage(stock.price, stock.prevClose, stock.percent)}
               </span>
             )}
           </div>
