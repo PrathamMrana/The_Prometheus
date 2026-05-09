@@ -357,7 +357,7 @@ const Dashboard = () => {
                 <div className="flex items-center gap-4">
                     <div className="px-4 py-2 glass border border-white/5 rounded-sm flex items-center gap-3">
                         <Database size={14} className={isMarketOpen() ? "text-bull animate-pulse" : "text-gold"} />
-                        <span className="text-[10px] font-mono text-white/80 tracking-widest">{isMarketOpen() ? 'v6.8 CORE ACTIVE' : 'v6.8 CORE STABILIZED'}</span>
+                        <span className="text-[10px] font-mono text-white/80 tracking-widest">{isMarketOpen() ? 'v6.9 [HARDENED] ACTIVE' : 'v6.9 [HARDENED] STABILIZED'}</span>
                     </div>
                 </div>
             </div>

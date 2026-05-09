@@ -86,7 +86,7 @@ export const MainLayout = ({ children }) => {
   return (
     <div className="h-screen bg-background text-white flex flex-col font-inter overflow-hidden select-none">
       <AnimatePresence>
-        {health.status !== 'LIVE' && (
+        {(health.status === 'DISCONNECTED' || health.status === 'STALLED' || health.status === 'SYNCING') && (
           <motion.div 
             initial={{ height: 0 }} 
             animate={{ height: 'auto' }} 
