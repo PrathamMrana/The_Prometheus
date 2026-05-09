@@ -141,7 +141,7 @@ export const useMarketStore = create((set, get) => ({
 
       updates.forEach(d => {
         const rawSymbol = d.symbol || "";
-        const key = rawSymbol.split(".")[0]?.trim();
+        const key = rawSymbol.replace('^', '').split(".")[0]?.trim().toUpperCase();
         if (!key) return;
 
         const id = `${key}-${d.timestamp}`;
