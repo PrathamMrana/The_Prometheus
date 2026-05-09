@@ -137,3 +137,4 @@ yfinance.cache
 debug/
 tests/
 archive/
+*.cache
