@@ -112,7 +112,7 @@ function updateHistory(symbol, tick) {
         timestamp: tick.timestamp
     });
 
-    if (arr.length > 300) arr.shift(); // 🛡️ Fix: Bound to 300 to prevent OOM
+    if (arr.length > 80) arr.shift(); // 🛡️ [RENDER] Bound to 80 (was 300) to stay within 512MB free tier
 }
 
 /**
@@ -234,7 +234,7 @@ let isExecuting = false;
 let currentChunkIndex = 0;
 let cycleCount = 0;
 let failStreak = 0;
-const CHUNK_SIZE = 10; // Increased for faster SIM saturation (from 3)
+const CHUNK_SIZE = 5; // 🛡️ [RENDER] Reduced to 5 (was 10) to reduce per-cycle memory spike
 
 // 🛡️ [HOISTING] Critical resources outside hot path
 let universeArray = [];
@@ -301,7 +301,7 @@ async function start() {
     console.log(`\n🔱 [BOOT PULSE] Fetching fresh prices for ALL ${universeArray.length} symbols...`);
     try {
         const allBatches = [];
-        const batchSize = 25;
+        const batchSize = 10; // 🛡️ [RENDER] Smaller batches at boot to reduce peak memory
         for (let i = 0; i < universeArray.length; i += batchSize) {
             allBatches.push(universeArray.slice(i, i + batchSize));
         }
@@ -442,8 +442,8 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
             let cycleSuccess = true;
             // 🛡️ Memory Guard
             const heapUsed = process.memoryUsage().heapUsed;
-            if (heapUsed > 500 * 1024 * 1024) {
-                if (!SYSTEM_STATE.SAFE_MODE) console.error("🚨 [MEMORY GUARD] Heap > 500MB. Activating SAFE_MODE.");
+            if (heapUsed > 400 * 1024 * 1024) {
+                if (!SYSTEM_STATE.SAFE_MODE) console.error("🚨 [MEMORY GUARD] Heap > 400MB. Activating SAFE_MODE.");
                 SYSTEM_STATE.SAFE_MODE = true;
             }
 

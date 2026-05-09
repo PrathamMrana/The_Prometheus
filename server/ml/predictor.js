@@ -25,10 +25,7 @@ function predict(symbol, history, analytics = {}, previousSignal = "HOLD") {
         const payload = JSON.stringify(features);
         const escapedPayload = payload.replace(/"/g, '\\"');
         
-        const pyEnv = {
-            ...process.env,
-            PYTHONPATH: ":/opt/anaconda3/lib/python313.zip:/opt/anaconda3/lib/python3.13:/opt/anaconda3/lib/python3.13/lib-dynload:/opt/anaconda3/lib/python3.13/site-packages"
-        };
+        const pyEnv = { ...process.env };
 
         exec(`${PYTHON_PATH} ${SCRIPT_PATH} predict "${escapedPayload}"`, { env: pyEnv }, (error, stdout, stderr) => {
             if (error) {
