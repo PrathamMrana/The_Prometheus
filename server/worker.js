@@ -619,6 +619,9 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                     const percent = entry.percent || entry.pct_change || 0; // Schema safety
                     const prevClose = entry.prevClose;
 
+                    // 🛡️ [PHASE 11] True "isIndex" check
+                    const isIndex = rawSym.startsWith('^') || canonical.endsWith('VIX');
+
                     let status = "NO_DATA";
                     if (finalPrice !== null && finalPrice > 0) {
                         status = (entry.is_lkg) ? "RECOVERY_MODE" : "LIVE";
@@ -690,14 +693,15 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                     const updatedHistory = priceHistory.get(canonical);
 
                     const NON_TRADABLE_SECTORS = ['INDEX', 'MACRO'];
-                    const symbolSector = rootGlobalState.SECTOR_MAP[canonical] || 'UNKNOWN';
-                    const isIndex = NON_TRADABLE_SECTORS.includes(symbolSector);
+                    const symbolSector = rootGlobalState.SECTOR_MAP[rawSym] || 'UNKNOWN'; // 🔱 [FIX] Use rawSym for sector lookup
+                    // isIndex was declared above, we update it or just use the combined logic
+                    const isIndexFinal = isIndex || NON_TRADABLE_SECTORS.includes(symbolSector);
 
-                    const p17Signal = isIndex
+                    const p17Signal = isIndexFinal
                         ? { status: 'READY', decision: 'HOLD', score: 0, sectorFlow: 0, breakout: false }
                         : await StrategyManager.generate(canonical, updatedHistory, rootGlobalState);
 
-                    if (p17Signal && !isIndex) {
+                    if (p17Signal && !isIndexFinal) {
                         const sigId = ledger.appendEvent({
                             traceId,
                             causationId: traceId,
@@ -720,7 +724,7 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                         // 🔱 [PHASE 10] NORMALIZE SIGNAL — one canonical object per symbol
                         // All downstream consumers (UI, execution, opportunity board) use this.
                         const dataAge = Date.now() - (entry.timestamp || 0);
-                        const normalizedSignal = (!isIndex && p17Signal)
+                        const normalizedSignal = (!isIndexFinal && p17Signal)
                             ? SignalNormalizer.normalize(p17Signal, entry, rootGlobalState, dataAge)
                             : p17Signal;
 
