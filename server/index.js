@@ -56,7 +56,20 @@ const monitor = require('./utils/monitor');
 const app = express();
 app.use(helmet()); // 🔐 Security Headers
 app.use(cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: function(origin, callback) {
+        const allowed = [
+            "http://localhost:5173",
+            "http://localhost:5174",
+            "http://localhost:5175",
+            "https://the-prometheus.vercel.app",
+        ];
+        // Allow Vercel preview deployments (*.vercel.app) and no-origin (curl/Postman)
+        if (!origin || allowed.includes(origin) || /\.vercel\.app$/.test(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('CORS: Origin not allowed'));
+        }
+    },
     credentials: true
 }));
 app.use(express.json());
