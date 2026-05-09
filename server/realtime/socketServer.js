@@ -2,6 +2,7 @@ const { WebSocketServer, WebSocket } = require('ws');
 const marketState = require('../intelligence/marketState');
 const Persistence = require('../utils/persistence');
 const syncCoordinator = require('../apiLayer/syncCoordinator');
+const healthMonitor = require('../telemetry/healthMonitor');
 
 // 🚀 PROMETHEUS REAL-TIME HUB (v6.9 PRODUCTION HARDENED)
 let wss;
@@ -94,7 +95,8 @@ function init(server) {
         broadcast({ 
             type: 'HEARTBEAT', 
             timestamp: Date.now(),
-            sync_id: syncCoordinator.getSyncId()
+            sync_id: syncCoordinator.getSyncId(),
+            health: healthMonitor.getDiagnostics() // 🔱 [PHASE 21] Global Health Purity
         });
     }, 5000);
 
@@ -128,6 +130,7 @@ function syncOnConnect(ws, req) {
                 symbol: key,
                 price,
                 percent: Number(data.percent) || Number(data.pct_change) || 0,
+                prevClose: Number(data.prevClose) || 0,
                 sparkline: data.sparkline || [],
                 signal: data.signal || { decision: "HOLD", score: 50, confidence: 0.5 },
                 anomaly: data.anomaly || null,
@@ -143,6 +146,7 @@ function syncOnConnect(ws, req) {
             type: "STATE",
             timestamp: Date.now(),
             sync_id,
+            health: healthMonitor.getDiagnostics(), // 🔱 [PHASE 21]
             data: snapshot
         };
 

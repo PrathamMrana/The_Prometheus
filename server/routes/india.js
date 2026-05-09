@@ -88,8 +88,9 @@ router.get('/quote', async (req, res) => {
                 if (lkg) finalPrice = lkg.price;
             }
 
+            const { calculatePercentageChange } = require('../utils/telemetry');
             const prev = spark.prev || (py.prev_close || finalPrice);
-            const pct = (prev !== 0 ? ((finalPrice - prev) / prev) * 100 : 0);
+            const pct = calculatePercentageChange(finalPrice, prev);
 
             return {
                 symbol: sym,

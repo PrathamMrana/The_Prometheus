@@ -17,6 +17,8 @@ import { useTradeStore } from '../store/tradeStore';
 import { useNavigate } from 'react-router-dom';
 import { isMarketOpen } from '../utils/marketStatus';
 import { apiFetch } from '../utils/api';
+import { TelemetryHealthPanel } from '../components/terminal/TelemetryHealthPanel';
+import { DeveloperDiagnostics } from '../components/terminal/DeveloperDiagnostics';
 import { 
   Zap, 
   Cpu, 
@@ -163,7 +165,7 @@ const AIExecutiveSummary = () => {
 
             {/* Health & Continuity Row (4/12) */}
             <div className="lg:col-span-4 flex flex-col gap-4">
-                <SystemHealthMonitor />
+                <TelemetryHealthPanel />
                 <div className="glass p-4 rounded-sm border-l-2 border-bear/60 bg-bear/[0.02] flex-1">
                     <div className="flex items-center gap-2 mb-3">
                         <AlertTriangle size={12} className="text-bear" />
@@ -307,6 +309,7 @@ const Dashboard = () => {
     const [now, setNow] = useState(Date.now());
     const [isScanning, setIsScanning] = useState(false);
     const [scannedSector, setScannedSector] = useState(null);
+    const [devMode, setDevMode] = useState(false);
  
     useEffect(() => {
         const timer = setInterval(() => setNow(Date.now()), 1000);
@@ -530,6 +533,26 @@ const Dashboard = () => {
             <div className="w-full">
                 <SystemCoreLogs />
             </div>
+
+            {/* 🛠️ [PHASE 21] INSTITUTIONAL DIAGNOSTICS */}
+            <div className="flex justify-center mt-12 mb-4">
+                <button 
+                    onClick={() => setDevMode(!devMode)}
+                    className="px-4 py-2 glass border border-white/5 rounded-sm text-[8px] font-mono font-bold text-muted hover:text-white transition-all uppercase tracking-[0.3em]"
+                >
+                    {devMode ? 'Close Root Diagnostics' : 'Access Root Diagnostics'}
+                </button>
+            </div>
+
+            {devMode && (
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="w-full"
+                >
+                    <DeveloperDiagnostics />
+                </motion.div>
+            )}
         </motion.div>
     );
 };

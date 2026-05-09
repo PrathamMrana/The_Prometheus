@@ -41,6 +41,7 @@ function processTick(data, global) {
     price: data.price,
     change: data.change || 0,
     pct_change: data.pct_change || data.percent || 0,
+    prevClose: data.prevClose || 0, // 🔱 [PHASE 21] Ensure baseline follows telemetry
     signal: data.signal,
     anomaly: data.anomaly || null,
     zscore: z,

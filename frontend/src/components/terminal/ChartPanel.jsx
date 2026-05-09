@@ -4,6 +4,7 @@ import { useTradeStore } from '../../store/tradeStore';
 import { useMarketStore } from '../../store/marketStore';
 import { Loader2, TrendingUp, TrendingDown, Clock, Activity, AlertCircle, BarChart2, Layers } from 'lucide-react';
 import { apiFetch } from '../../utils/api';
+import { getSyncMessage } from '../../utils/telemetry';
 
 const { createChart, ColorType, CandlestickSeries, HistogramSeries, LineSeries } = LWC;
 
@@ -350,7 +351,13 @@ export const ChartPanel = () => {
             LIVE
           </div>
           <div className={`text-[10px] font-mono font-black ${isUp ? 'text-bull' : 'text-bear'}`}>
-            {isUp ? '+' : ''}{stock.percent?.toFixed(2)}%
+            {!getSyncMessage(stock.price, stock.prevClose) ? (
+              `${isUp ? '+' : ''}${stock.percent?.toFixed(2)}%`
+            ) : (
+              <span className="text-[7px] text-muted/40 animate-pulse uppercase tracking-widest">
+                {getSyncMessage(stock.price, stock.prevClose)}
+              </span>
+            )}
           </div>
         </div>
       </div>

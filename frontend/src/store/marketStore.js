@@ -1,7 +1,17 @@
 import { create } from 'zustand';
+import { calculatePercentageChange, isBaselineFrozen } from '../utils/telemetry';
 
 export const useMarketStore = create((set, get) => ({
   market: {},
+  health: {
+    integrityScore: 100,
+    status: 'OPERATIONAL',
+    lastSync: Date.now(),
+    defensiveMode: false,
+    activeAdapters: [],
+    logs: [],
+    events: []
+  },
   global: {
     regime: "SIDEWAYS",
     risk: "LOW",
@@ -12,7 +22,6 @@ export const useMarketStore = create((set, get) => ({
   },
   anomalies: [],
   macro: [],
-  health: { status: 'LIVE', latency: 0, sources: {} },
   telemetry: null, // 🔱 [PHASE 19] Execution telemetry snapshot
   opportunityBoard: [], // 🔱 [PHASE 20] Ranked opportunity leaderboard
   boardMeta: null, // Phase 10: market context from backend
@@ -36,6 +45,32 @@ export const useMarketStore = create((set, get) => ({
   setSymbolMeta: (sym) => set((s) => ({
     symbolMeta: { ...s.symbolMeta, [sym]: true }
   })),
+
+  onMessage: (data) => {
+    if (data.type === 'HEARTBEAT') {
+      set({ 
+        health: { ...get().health, ...data.health, lastSync: Date.now() }
+      });
+      return;
+    }
+
+    if (data.type === 'STATE') {
+      if (data.health) {
+        set({ health: { ...get().health, ...data.health } });
+      }
+      get().applyUpdate(data);
+      return;
+    }
+
+    if (data.type === 'TELEMETRY_STATE') {
+      set({ telemetry: data.payload });
+      if (data.health) {
+        set({ health: { ...get().health, ...data.health } });
+      }
+      return;
+    }
+    get().applyUpdate(data);
+  },
 
   applyUpdate: (payload) => set((state) => {
     // 🥶 [PHASE 6] GLOBAL HARD BLOCK
@@ -102,7 +137,16 @@ export const useMarketStore = create((set, get) => ({
         const currency = rawSymbol.includes('.NS') ? 'INR' : 'USD';
         
         const incomingPct = d.percent !== undefined ? d.percent : d.pct_change;
-        const newPercent = Number.isFinite(incomingPct) ? incomingPct : 0;
+        const prevClose = d.prevClose || 0;
+        
+        // 🔱 [TELEMETRY ENGINE] Unified Percentage Calculation
+        let finalPercent = calculatePercentageChange(d.price, prevClose);
+        
+        // Fallback to incoming if engine returns null (e.g. missing baseline)
+        if (finalPercent === null) finalPercent = Number.isFinite(incomingPct) ? incomingPct : 0;
+
+        // 🔱 [TELEMETRY LOGGING]
+        console.log(`[TELEMETRY] ${key} | Price: ${d.price} | PrevClose: ${prevClose} | %: ${finalPercent}% | Status: ${d.status}`);
 
         // 🔒 [SAFE FALLBACK] Only trigger when Phase 17 pipeline hasn't produced signal yet.
         if (!d.signal) {
@@ -118,8 +162,9 @@ export const useMarketStore = create((set, get) => ({
           rawSymbol: rawSymbol,
           currency: currency,
           price: d.price,
-          percent: newPercent,
-          pct_change: newPercent,
+          prevClose: prevClose, // 🔱 [PHASE 21] Persistent Baseline
+          percent: finalPercent,
+          pct_change: finalPercent,
           sparkline: d.sparkline || newMarket[key]?.sparkline || [],
           signal: d.signal,
           anomaly: d.anomaly || newMarket[key]?.anomaly || null,
@@ -154,7 +199,22 @@ export const useMarketStore = create((set, get) => ({
 
         const newPrice = Number.isFinite(d.price) ? d.price : (newMarket[key]?.price ?? null);
         const incomingPct = d.percent !== undefined ? d.percent : d.pct_change;
-        const newPercent = Number.isFinite(incomingPct) ? incomingPct : (newMarket[key]?.percent ?? 0);
+        const prevClose = d.prevClose || newMarket[key]?.prevClose || 0;
+
+        // 🔱 [TELEMETRY ENGINE] Centralized Calculation Engine
+        let finalPercent = calculatePercentageChange(newPrice, prevClose);
+        
+        // ❄️ [BASELINE FREEZE] If market is closed, do not allow recalculations that jitter
+        if (isBaselineFrozen(newMarket[key]?.status)) {
+           finalPercent = newMarket[key]?.percent ?? finalPercent;
+        }
+
+        if (finalPercent === null) finalPercent = Number.isFinite(incomingPct) ? incomingPct : (newMarket[key]?.percent ?? 0);
+
+        // 🔱 [TELEMETRY LOGGING] Detailed update trace
+        if (newPrice !== newMarket[key]?.price) {
+           console.log(`[TICK_TELEMETRY] ${key} | New: ${newPrice} | Prev: ${newMarket[key]?.price} | Baseline: ${prevClose} | %: ${finalPercent}%`);
+        }
 
         newMarket[key] = {
           ...(newMarket[key] || {}),
@@ -163,8 +223,9 @@ export const useMarketStore = create((set, get) => ({
           rawSymbol: rawSymbol,
           currency: currency,
           price: newPrice,
-          percent: newPercent,
-          pct_change: newPercent,
+          prevClose: prevClose, // 🔱 [PHASE 21] Hardened reference
+          percent: finalPercent,
+          pct_change: finalPercent,
           sparkline: d.sparkline && d.sparkline.length > 0 ? d.sparkline : (newMarket[key]?.sparkline || []),
           // 🔱 [PURITY LOCK] Keep existing signal if new tick hasn't been processed by intelligence yet
           signal: (d.signal && (d.signal.decision || d.signal.score)) ? d.signal : (newMarket[key]?.signal || { decision: 'LOADING', score: 0 }),

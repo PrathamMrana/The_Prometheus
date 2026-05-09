@@ -3,6 +3,7 @@ import { useMarketStore } from '../../store/marketStore';
 import { TrendingUp, TrendingDown, Clock, Lock } from 'lucide-react';
 import { PriceFlash } from '../shared/PriceFlash';
 import { SparkSvg } from '../shared/SparkSvg';
+import { getSyncMessage } from '../../utils/telemetry';
 
 const FreshnessAgo = ({ symbol }) => {
   const stock = useMarketStore(state => state.market[symbol]);
@@ -134,10 +135,18 @@ export const IndexCard = ({ symbol, label, market: marketType = 'IN', onSelect, 
         <PriceFlash value={safePrice} prefix={marketType === 'US' ? '$' : '₹'} />
       </div>
       <div className={`font-mono text-[11px] font-bold mt-1 flex items-center gap-1 ${isUp ? 'text-bull' : 'text-bear'}`}>
-        {safePercent !== null && (isUp ? <TrendingUp size={10} /> : <TrendingDown size={10} />)}
-        <span>
-          {safePercent === null ? "---" : `${(isUp && safePercent > 0 ? '+' : '')}${safePercent.toFixed(2)}%`}
-        </span>
+        {safePercent !== null && !getSyncMessage(safePrice, stock?.prevClose) ? (
+          <>
+            {isUp ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
+            <span>
+              {`${(isUp && safePercent > 0 ? '+' : '')}${safePercent.toFixed(2)}%`}
+            </span>
+          </>
+        ) : (
+          <span className="text-[7px] text-muted/40 uppercase tracking-widest animate-pulse">
+            {getSyncMessage(safePrice, stock?.prevClose) || "SYNCING..."}
+          </span>
+        )}
       </div>
       
       {stock.sparkline && stock.sparkline.length > 0 && (

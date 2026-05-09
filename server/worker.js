@@ -18,6 +18,7 @@ const { TickCoalescer, PRIORITY, COMPUTE_CORES } = require('./engine/tickCoalesc
 const indicatorEngine = require('./intelligence/incrementalIndicators'); // 🔱 [PERF] O(1) indicators
 const { ledger, EVENT_TYPES } = require('./engine/executionLedger');
 const snapshotDaemon = require('./engine/snapshotDaemon');
+const healthMonitor = require('./telemetry/healthMonitor');
 
 // 🔱 [PHASE 10] CANONICAL SIGNAL NORMALIZER — one source of truth for all signal data
 const SignalNormalizer = require('./core/SignalNormalizer');
@@ -438,6 +439,14 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
         }
 
         console.time('cycle');
+        // 🛡️ [PHASE 21] TELEMETRY RECOVERY SENSOR
+        const recoveryFlag = path.join(process.cwd(), '.telemetry_recovery');
+        if (fs.existsSync(recoveryFlag)) {
+            console.log('🔄 [RECOVERY] Telemetry recovery flag detected. Forcing full sync.');
+            SYSTEM_STATE.CYCLE_COUNT = 0; // Reset to 0 to trigger immediate full sync at line 1031
+            try { fs.unlinkSync(recoveryFlag); } catch(e){}
+        }
+
         const startTime = Date.now();
         isExecuting = true;
 
@@ -520,8 +529,8 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                             ...existing,
                             ...data,
                             price: newPrice,
-                            percent: newPct, // 🔱 [FIX] Force fresh percent on boot
-                            pct_change: newPct,
+                            percent: finalPercent, // 🔱 [FIX] Use validated percent
+                            pct_change: finalPercent,
                             symbol: canonical,
                             is_lkg: data.source === 'LKG'
                         });
@@ -741,6 +750,11 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                     // isIndex was declared above, we update it or just use the combined logic
                     const isIndexFinal = isIndex || NON_TRADABLE_SECTORS.includes(symbolSector);
 
+                    if (healthMonitor.metrics.defensiveMode) {
+                        console.warn('🛡️ [DEFENSIVE_MODE] Suppressing signal generation during telemetry instability.');
+                        return;
+                    }
+                    
                     const p17Signal = isIndexFinal
                         ? { status: 'READY', decision: 'HOLD', score: 0, sectorFlow: 0, breakout: false }
                         : await StrategyManager.generate(canonical, updatedHistory, rootGlobalState);
@@ -1033,6 +1047,20 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                 // Throttled to every 5 cycles, but FORCED on first cycle (1) to ensure immediate UI hydration.
                 if (SYSTEM_STATE.CYCLE_COUNT === 1 || SYSTEM_STATE.CYCLE_COUNT % 5 === 0) {
                     console.log(`🚀 [SYNC] Broadcasting full STATE snapshot (Cycle: ${SYSTEM_STATE.CYCLE_COUNT})`);
+                    
+                    // 🔱 [PHASE 21] UPDATE HEALTH MONITOR
+                    healthMonitor.update({
+                        latency: Date.now() - startTime,
+                        staleCount: totalGaps,
+                        providers: Array.from(new Set(Array.from(portfolioCache.values()).map(v => v.source || 'DEFAULT'))),
+                        sync_id: syncCoordinator.getSyncId()
+                    });
+
+                    // 🛡️ [CIRCUIT_BREAKER] Automatic Recovery Trigger
+                    if (healthMonitor.metrics.status === 'CRITICAL' || healthMonitor.metrics.status === 'DEFENSIVE') {
+                        await healthMonitor.triggerRecovery();
+                    }
+
                     const snapshot = Array.from(portfolioCache.entries()).map(([symbol, data]) => ({
                         ...data,
                         symbol: symbol
@@ -1040,6 +1068,7 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                     broadcast({
                         type: "STATE",
                         data: snapshot,
+                        health: healthMonitor.getDiagnostics(),
                         sync_id: syncCoordinator.getSyncId(),
                         timestamp: now
                     });
