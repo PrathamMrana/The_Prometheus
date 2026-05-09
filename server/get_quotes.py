@@ -330,13 +330,31 @@ def get_quotes(input_symbols):
         prev_close = meta_prev or spark_prev or ticker.get("chartPreviousClose") or curr_price
         
         # Division Safety
+        # 🔱 [PHASE 21] NSE/INDEX CLOSING ACCURACY ENGINE
         official_pct = ticker.get("official_pct")
-        if official_pct is not None:
-            pct_change = round(official_pct, 4) # 🔱 [PHASE 21] Higher precision
-        elif prev_close and prev_close != 0:
-            pct_change = round(((curr_price - prev_close) / prev_close) * 100, 4)
+        official_prev = ticker.get("official_prev") or ticker.get("regularMarketPreviousClose")
+        
+        # 1. Use official percent if available and non-zero
+        if official_pct is not None and abs(official_pct) > 0.0001:
+            pct_change = round(official_pct, 4)
+        # 2. Recalculate using official previous close vs current price (Best for weekends)
+        elif official_prev and official_prev > 0 and abs(curr_price - official_prev) > 0.0001:
+            pct_change = round(((curr_price - official_prev) / official_prev) * 100, 4)
+        # 3. WEEKEND DEEP-SCAN: Find the last real session move
         else:
             pct_change = 0
+            if len(closes) > 1:
+                # Find the last price of today's (or Friday's) session
+                last_price = closes[-1]
+                last_day_ts = datetime.fromtimestamp(times[-1]).date()
+                
+                # Scan backwards to find the last price of the PREVIOUS session
+                for j in range(len(closes)-2, -1, -1):
+                    if datetime.fromtimestamp(times[j]).date() < last_day_ts:
+                        prev_session_close = closes[j]
+                        if abs(last_price - prev_session_close) > 0.0001:
+                            pct_change = round(((last_price - prev_session_close) / prev_session_close) * 100, 4)
+                        break
         
         if sym == "^NSEI": nifty_change = pct_change
         

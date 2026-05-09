@@ -97,6 +97,9 @@ export const useMarketStore = create((set, get) => ({
         if (d.status === 'DEAD') return;
 
         const currency = rawSymbol.includes('.NS') ? 'INR' : 'USD';
+        
+        const incomingPct = d.percent !== undefined ? d.percent : d.pct_change;
+        const newPercent = Number.isFinite(incomingPct) ? incomingPct : 0;
 
         // 🔒 [SAFE FALLBACK] Only trigger when Phase 17 pipeline hasn't produced signal yet.
         if (!d.signal) {
@@ -112,7 +115,8 @@ export const useMarketStore = create((set, get) => ({
           rawSymbol: rawSymbol,
           currency: currency,
           price: d.price,
-          percent: d.percent || 0,
+          percent: newPercent,
+          pct_change: newPercent,
           sparkline: d.sparkline || newMarket[key]?.sparkline || [],
           signal: d.signal,
           anomaly: d.anomaly || newMarket[key]?.anomaly || null,
@@ -145,14 +149,19 @@ export const useMarketStore = create((set, get) => ({
 
         const currency = rawSymbol.includes('.NS') ? 'INR' : (newMarket[key]?.currency || 'USD');
 
+        const newPrice = Number.isFinite(d.price) ? d.price : (newMarket[key]?.price ?? null);
+        const incomingPct = d.percent !== undefined ? d.percent : d.pct_change;
+        const newPercent = Number.isFinite(incomingPct) ? incomingPct : (newMarket[key]?.percent ?? 0);
+
         newMarket[key] = {
           ...(newMarket[key] || {}),
           ...d,
           symbol: key,
           rawSymbol: rawSymbol,
           currency: currency,
-          price: Number.isFinite(d.price) ? d.price : (newMarket[key]?.price ?? null),
-          percent: Number.isFinite(d.percent || d.pct_change) ? (d.percent || d.pct_change) : (newMarket[key]?.percent ?? null),
+          price: newPrice,
+          percent: newPercent,
+          pct_change: newPercent,
           sparkline: d.sparkline && d.sparkline.length > 0 ? d.sparkline : (newMarket[key]?.sparkline || []),
           // 🔱 [PURITY LOCK] Keep existing signal if new tick hasn't been processed by intelligence yet
           signal: (d.signal && (d.signal.decision || d.signal.score)) ? d.signal : (newMarket[key]?.signal || { decision: 'LOADING', score: 0 }),
