@@ -139,7 +139,18 @@ function init(server) {
 function syncOnConnect(ws, req) {
     const ip = ws._remoteAddress || (req ? (req.headers['x-forwarded-for'] || req.socket.remoteAddress) : 'UNKNOWN');
     try {
-        const cache = Persistence.load();
+        let cache = Persistence.load();
+        
+        // 🛡️ [PHASE 21] FORENSIC FALLBACK
+        // If the live cache is empty (cold start on Render), force-load from the bootstrap snapshot
+        // to ensure the UI isn't blank while the worker performs its first fetch cycle.
+        if (cache.size === 0) {
+            console.warn(`[SOCKET] Live cache empty for ${ip}. Attempting forensic hydration from bootstrap...`);
+            // Persistence.load() already tries bootstrap if CACHE_FILE is missing.
+            // But if CACHE_FILE exists and is empty, we force the issue.
+            cache = Persistence.getInstance(); 
+        }
+
         const sync_id = syncCoordinator.getSyncId();
 
         // 🔱 [PHASE 21] IMMEDIATE HEALTH HYDRATION

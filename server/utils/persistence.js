@@ -34,8 +34,12 @@ class Persistence {
                 const raw = fs.readFileSync(CACHE_FILE);
                 const obj = JSON.parse(raw);
                 sharedInstance = new Map(Object.entries(obj));
-                console.log(`📡 [PERSISTENCE] Cache Singleton Hydrated: ${sharedInstance.size} symbols.`);
-                return sharedInstance;
+                
+                if (sharedInstance.size > 0) {
+                    console.log(`📡 [PERSISTENCE] Cache Singleton Hydrated: ${sharedInstance.size} symbols.`);
+                    return sharedInstance;
+                }
+                console.warn(`📡 [PERSISTENCE] Cache file exists but is EMPTY. Falling back to bootstrap...`);
             }
 
             // 🛡️ [PHASE 21] SECONDARY: Fallback to baked-in bootstrap snapshot on cold starts (Render/New Deploy)
