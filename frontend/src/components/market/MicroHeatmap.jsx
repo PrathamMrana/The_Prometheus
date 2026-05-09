@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMarketStore } from '../../store/marketStore';
 import { useTradeStore } from '../../store/tradeStore';
-import { LayoutGrid, Info, Target } from 'lucide-react';
+import { LayoutGrid, Info, Target, Database } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getFreshnessDisplay, isMarketOpen } from '../../utils/marketStatus';
 
