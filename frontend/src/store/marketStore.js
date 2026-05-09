@@ -92,7 +92,10 @@ export const useMarketStore = create((set, get) => ({
 
       listToProcess.forEach((d) => {
         const rawSymbol = d.symbol || "";
-        const key = rawSymbol.split(".")[0]?.trim().toUpperCase();
+        const id = d.id || d.tick_id || Date.now();
+        
+        // 🔱 [NORMALIZATION] Strip '^' and suffixes for unified store access
+        const key = rawSymbol.replace('^', '').split(".")[0]?.trim().toUpperCase();
         if (!key || !Number.isFinite(d.price)) return;
         if (d.status === 'DEAD') return;
 
