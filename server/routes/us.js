@@ -9,7 +9,7 @@ const Persistence = require('../utils/persistence');
 // Helper to call Python bridge
 function fetchQuotesViaPython(symbols) {
     return new Promise((resolve, reject) => {
-        const pythonPath = '/opt/anaconda3/bin/python3';
+        const pythonPath = process.env.PYTHON_PATH || 'python3';
         const scriptPath = path.join(__dirname, '../get_quotes.py');
         const pyEnv = {
             ...process.env,

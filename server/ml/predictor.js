@@ -2,7 +2,7 @@ const { exec } = require('child_process');
 const path = require('path');
 const { extractFeatures } = require('./features');
 
-const PYTHON_PATH = '/opt/anaconda3/bin/python3';
+const PYTHON_PATH = process.env.PYTHON_PATH || 'python3';
 const SCRIPT_PATH = path.join(__dirname, 'model.py');
 
 /**

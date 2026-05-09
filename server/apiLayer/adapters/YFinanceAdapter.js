@@ -12,7 +12,7 @@ class YFinanceAdapter extends BaseAdapter {
         // Use project venv first, fall back to Anaconda if venv missing
         const venvPy = path.join(__dirname, '../../venv/bin/python3');
         const { existsSync } = require('fs');
-        this.pyPath = existsSync(venvPy) ? venvPy : '/opt/anaconda3/bin/python3';
+        this.pyPath = existsSync(venvPy) ? venvPy : process.env.PYTHON_PATH || 'python3';
         this.scriptPath = path.join(__dirname, '../../get_quotes.py');
     }
 

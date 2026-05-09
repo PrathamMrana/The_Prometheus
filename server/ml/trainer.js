@@ -3,7 +3,7 @@ const path = require('path');
 const { exec } = require('child_process');
 const { buildTrainingData } = require('./features');
 
-const PYTHON_PATH = '/opt/anaconda3/bin/python3';
+const PYTHON_PATH = process.env.PYTHON_PATH || 'python3';
 const SCRIPT_PATH = path.join(__dirname, 'model.py');
 const DATA_PATH = path.join(__dirname, 'dataset.json');
 
