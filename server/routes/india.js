@@ -97,6 +97,7 @@ router.get('/quote', async (req, res) => {
                 displaySymbol: sym.replace('.NS', '').replace('.BO', '').replace('^', ''),
                 price: parseFloat(finalPrice.toFixed(4)),
                 pct_change: parseFloat(pct.toFixed(4)),
+                prevClose: prev,
                 volume: py.volume || 0,
                 vol_ratio: py.vol_ratio || 1.0,
                 market: 'INDIA',

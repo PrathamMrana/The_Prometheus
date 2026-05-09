@@ -46,37 +46,20 @@ export const useMarketStore = create((set, get) => ({
     symbolMeta: { ...s.symbolMeta, [sym]: true }
   })),
 
-  onMessage: (data) => {
-    if (data.type === 'HEARTBEAT') {
-      set({ 
-        health: { ...get().health, ...data.health, lastSync: Date.now() }
-      });
-      return;
-    }
-
-    if (data.type === 'STATE') {
-      if (data.health) {
-        set({ health: { ...get().health, ...data.health } });
-      }
-      get().applyUpdate(data);
-      return;
-    }
-
-    if (data.type === 'TELEMETRY_STATE') {
-      set({ telemetry: data.payload });
-      if (data.health) {
-        set({ health: { ...get().health, ...data.health } });
-      }
-      return;
-    }
-    get().applyUpdate(data);
-  },
-
   applyUpdate: (payload) => set((state) => {
     // 🥶 [PHASE 6] GLOBAL HARD BLOCK
     if (state.freeze) return state;
 
-    if (!payload || payload.type === 'HEARTBEAT') return state;
+    if (!payload) return state;
+
+    // 🔱 [PHASE 21] INSTITUTIONAL HEALTH SYNC
+    if (payload.health) {
+      state.health = { ...state.health, ...payload.health, lastSync: Date.now() };
+    }
+
+    if (payload.type === 'HEARTBEAT') {
+      return { ...state };
+    }
 
     if (payload.type === 'GLOBAL_STATE') {
       const g = payload.payload || state.global;

@@ -717,6 +717,7 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                         sector: rootGlobalState.SECTOR_MAP[canonical] || "UNKNOWN",
                         timestamp: entry.timestamp || now, // 🔱 [Purity Lock] Prefer exchange timestamp
                         status: marketClosed ? 'CLOSED' : status,
+                        prevClose: prevClose, // 🔱 [PHASE 21] Institutional baseline propagation
                         source: entry.source || "YFINANCE",
                         quality: entry.quality || 0
                     };
