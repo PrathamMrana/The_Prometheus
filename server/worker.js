@@ -619,7 +619,13 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                 // Resolve the actual chunk to process: coalesced symbols take precedence,
                 // fall back to currentChunk if coalescer is empty (first cycle warmup).
                 const effectiveChunk = symbolsToDrain.length > 0
-                    ? symbolsToDrain.map(s => rootGlobalState.SECTOR_MAP[s + '.NS'] ? s + '.NS' : (rootGlobalState.SECTOR_MAP['^' + s] ? '^' + s : s))
+                    ? symbolsToDrain.map(s => {
+                        if (rootGlobalState.SECTOR_MAP[s] === 'INDEX' || rootGlobalState.SECTOR_MAP[s] === 'MACRO') {
+                           return s.startsWith('^') ? s : '^' + s;
+                        }
+                        if (rootGlobalState.SECTOR_MAP[s]) return s + '.NS';
+                        return s;
+                    })
                     : currentChunk;
 
                 // 🔱 [PHASE 17 & 24] PARALLEL CHUNK PROCESSING WITH BOUNDED CONCURRENCY
@@ -632,6 +638,19 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
 
                     // 🔱 [FIX] Consume the tick to prevent infinite pipeline stall
                     tickCoalescer.consume(canonical);
+
+                    // 🛡️ [PHASE 21] HISTORY PRIMING (Prevent "Neutral 50" Scores on Startup)
+                    // If memory is empty (fresh deploy), reconstruct history from LKG sparklines
+                    if (!priceHistory.has(canonical) && entry.sparkline && entry.sparkline.length > 0) {
+                        const primedHistory = entry.sparkline.map(p => ({
+                            close: p,
+                            high: p,
+                            low: p,
+                            volume: 0,
+                            timestamp: Date.now() - (3600000) // Rough estimate
+                        }));
+                        priceHistory.set(canonical, primedHistory);
+                    }
 
                     const finalPrice = entry.price;
                     const percent = entry.percent || entry.pct_change || 0; // Schema safety
@@ -765,7 +784,7 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
                             volume_history: payload.volume_history
                         });
 
-                        if (!isIndex && p17Signal && p17Signal.score >= 30) {
+                        if (!isIndexFinal && p17Signal && p17Signal.score >= 30) {
                             const penalties = p17Signal.learningAdjustment?.penalties || [];
                             console.log(`[PHASE 17 / V5 SIGNAL] | ${canonical.padEnd(8)} | Score: ${p17Signal.score.toFixed(1)} | Decision: ${p17Signal.decision.padEnd(6)} | SectorFlow: ${(p17Signal.sectorFlow || 0).toFixed(2)} | Trend: ${p17Signal.trendStrength} | Adj: ${JSON.stringify(penalties)}`);
                             cycleBuffer.push({
