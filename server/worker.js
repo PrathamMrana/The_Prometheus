@@ -296,54 +296,60 @@ async function start() {
     // 🛡️ [PHASE 12 FIX] Removed redundant Persistence.load() that was wiping boot-seeded portfolioCache
 
     // 🔱 [BOOT PULSE] FULL UNIVERSE REFRESH
-    // Fetches ALL symbols fresh from yfinance immediately on startup.
-    // Ensures UI shows real prices matching Yahoo Finance from the very first connection.
-    console.log(`\n🔱 [BOOT PULSE] Fetching fresh prices for ALL ${universeArray.length} symbols...`);
-    try {
-        const allBatches = [];
-        const batchSize = 10; // 🛡️ [RENDER] Smaller batches at boot to reduce peak memory
-        for (let i = 0; i < universeArray.length; i += batchSize) {
-            allBatches.push(universeArray.slice(i, i + batchSize));
-        }
-
-        for (const batch of allBatches) {
-            try {
-                const resp = await apiManager.fetchBatch('PRICE', batch, 1);
-                const freshQuotes = resp.quotes || {};
-                let updated = 0;
-                for (const [sym, data] of Object.entries(freshQuotes)) {
-                    const canonical = sym.replace('.NS', '').replace('^', '').split('.')[0].trim().toUpperCase();
-                    if (canonical && data && Number.isFinite(data.price) && data.price > 0) {
-                        const existing = portfolioCache.get(canonical) || {};
-                        portfolioCache.set(canonical, { ...existing, ...data, is_lkg: false });
-
-                        // 🔱 [PHASE 18] REFRESH HISTORY IMMEDIATELY
-                        if (data.close && Array.isArray(data.close)) {
-                            const volHist = data.volume_history || [];
-                            const history = data.close.map((price, idx) => ({
-                                close: price,
-                                high: (data.high && data.high[idx]) ? data.high[idx] : price,
-                                low: (data.low && data.low[idx]) ? data.low[idx] : price,
-                                volume: (volHist[idx] !== undefined && volHist[idx] !== null) ? volHist[idx] : (data.volume || 0),
-                                timestamp: (data.timestamp && data.timestamp[idx]) ? data.timestamp[idx] : 0
-                            }));
-                            priceHistory.set(canonical, history);
-                            if (updated < 5) console.log(`[BOOT_DEBUG] ${canonical} | Seeded ${history.length} items | VolHist: ${volHist.length} | FirstVol: ${history[0].volume}`);
-                        }
-                        updated++;
-                    }
-                }
-                console.log(`✅ [BOOT PULSE] Batch updated ${updated}/${batch.length} symbols.`);
-            } catch (err) {
-                console.warn(`⚠️ [BOOT PULSE] Batch failed: ${err.message}`);
+    // Skip on memory-constrained environments (set DISABLE_BOOT_PULSE=true in Render env vars).
+    // The regular cycle will warm up the cache gradually when boot pulse is disabled.
+    if (process.env.DISABLE_BOOT_PULSE === 'true') {
+        console.log(`⚡ [BOOT PULSE] Skipped (DISABLE_BOOT_PULSE=true). Regular cycle will warm cache.`);
+    } else {
+        console.log(`\n🔱 [BOOT PULSE] Fetching fresh prices for ALL ${universeArray.length} symbols...`);
+        try {
+            const allBatches = [];
+            const batchSize = 10; // 🛡️ [RENDER] Smaller batches at boot to reduce peak memory
+            for (let i = 0; i < universeArray.length; i += batchSize) {
+                allBatches.push(universeArray.slice(i, i + batchSize));
             }
-        }
 
-        // Save fresh data to disk immediately
-        Persistence.save(portfolioCache);
-        console.log(`🔱 [BOOT PULSE] Complete. Cache refreshed with real market data.\n`);
-    } catch (err) {
-        console.error(`❌ [BOOT PULSE] Failed: ${err.message}. Using LKG data.`);
+            for (const batch of allBatches) {
+                try {
+                    const resp = await apiManager.fetchBatch('PRICE', batch, 1);
+                    const freshQuotes = resp.quotes || {};
+                    let updated = 0;
+                    for (const [sym, data] of Object.entries(freshQuotes)) {
+                        const canonical = sym.replace('.NS', '').replace('^', '').split('.')[0].trim().toUpperCase();
+                        if (canonical && data && Number.isFinite(data.price) && data.price > 0) {
+                            const existing = portfolioCache.get(canonical) || {};
+                            portfolioCache.set(canonical, { ...existing, ...data, is_lkg: false });
+
+                            // 🔱 [PHASE 18] REFRESH HISTORY IMMEDIATELY
+                            if (data.close && Array.isArray(data.close)) {
+                                const volHist = data.volume_history || [];
+                                const history = data.close.map((price, idx) => ({
+                                    close: price,
+                                    high: (data.high && data.high[idx]) ? data.high[idx] : price,
+                                    low: (data.low && data.low[idx]) ? data.low[idx] : price,
+                                    volume: (volHist[idx] !== undefined && volHist[idx] !== null) ? volHist[idx] : (data.volume || 0),
+                                    timestamp: (data.timestamp && data.timestamp[idx]) ? data.timestamp[idx] : 0
+                                }));
+                                priceHistory.set(canonical, history);
+                                if (updated < 5) console.log(`[BOOT_DEBUG] ${canonical} | Seeded ${history.length} items | VolHist: ${volHist.length} | FirstVol: ${history[0].volume}`);
+                            }
+                            updated++;
+                        }
+                    }
+                    console.log(`✅ [BOOT PULSE] Batch updated ${updated}/${batch.length} symbols.`);
+                    // 🛡️ [RENDER] Brief pause between batches to let GC reclaim Python child process memory
+                    await new Promise(r => setTimeout(r, 500));
+                } catch (err) {
+                    console.warn(`⚠️ [BOOT PULSE] Batch failed: ${err.message}`);
+                }
+            }
+
+            // Save fresh data to disk immediately
+            Persistence.save(portfolioCache);
+            console.log(`🔱 [BOOT PULSE] Complete. Cache refreshed with real market data.\n`);
+        } catch (err) {
+            console.error(`❌ [BOOT PULSE] Failed: ${err.message}. Using LKG data.`);
+        }
     }
 
     let baseline = parseFloat((process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2));
