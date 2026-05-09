@@ -128,9 +128,13 @@ export const useWebSocket = (url) => {
             ? apiBase.replace(/^https:\/\//, 'wss://').replace(/^http:\/\//, 'ws://')
             : (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host;
 
+          const token = useAuthStore.getState().accessToken;
           return `${base}${url}?token=${token}`;
         })()
-      : `${url}?token=${token}`;
+      : (() => {
+          const token = useAuthStore.getState().accessToken;
+          return `${url}?token=${token}`;
+        })();
 
     ws.current = new WebSocket(wsUrl);
 
