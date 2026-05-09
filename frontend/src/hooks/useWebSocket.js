@@ -115,16 +115,22 @@ export const useWebSocket = (url) => {
     
     const wsUrl = url.startsWith('/')
       ? (() => {
-          const apiBase = import.meta.env.VITE_API_URL;
-          if (apiBase) {
-            // In production: derive wss:// from the configured backend URL
-            const wsBase = apiBase.replace(/^https:\/\//, 'wss://').replace(/^http:\/\//, 'ws://');
-            return `${wsBase}${url}`;
+          // 🛡️ [PHASE 21] DYNAMIC ENVIRONMENT ROUTING
+          let apiBase = import.meta.env.VITE_API_URL;
+          
+          // Automatic discovery for Vercel -> Render production path
+          if (!apiBase && window.location.host.endsWith('.vercel.app')) {
+            console.warn('[WS] Environment variable VITE_API_URL missing. Defaulting to production Render bridge.');
+            apiBase = 'https://prometheus-api-zbgy.onrender.com';
           }
-          // In local dev: use the page's own host (backend and frontend share same origin)
-          return (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host + url;
+
+          const base = apiBase 
+            ? apiBase.replace(/^https:\/\//, 'wss://').replace(/^http:\/\//, 'ws://')
+            : (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host;
+
+          return `${base}${url}?token=${token}`;
         })()
-      : url;
+      : `${url}?token=${token}`;
 
     ws.current = new WebSocket(wsUrl);
 

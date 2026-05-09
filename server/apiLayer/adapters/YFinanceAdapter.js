@@ -78,11 +78,16 @@ class YFinanceAdapter extends BaseAdapter {
             const cmd = `${this.pyPath} ${this.scriptPath} "${symString}"`;
             
         exec(cmd, { env: { ...process.env, USER_AGENT: ua } }, (error, stdout, stderr) => {
-            if (error && !stdout.includes('{"quotes":')) return reject(new Error(`Exec error: ${error.message}`));
             try {
+                // 🔱 [FORENSIC LOG] Capture raw python output for diagnostic purposes
+                // console.log(`[YF_RAW_DEBUG] | Symbols: ${symString} | Length: ${stdout?.length}`);
+                
                 // 🔱 [FIX] Extract only the JSON payload, ignoring yfinance terminal warnings (like 'symbol delisted')
                 const jsonStart = stdout.indexOf('{"quotes":');
-                if (jsonStart === -1) throw new Error("JSON payload not found in python output");
+                if (jsonStart === -1) {
+                    console.error(`[YF_DATA_ERROR] JSON payload not found. Raw output: ${stdout.substring(0, 500)}...`);
+                    throw new Error("JSON payload not found in python output");
+                }
                 
                 const cleanJson = stdout.substring(jsonStart);
                 const parsed = JSON.parse(cleanJson);
