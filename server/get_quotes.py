@@ -316,13 +316,15 @@ def get_quotes(input_symbols):
         market_status = "LIVE" if (int(time.time()) - times[-1]) < 1800 else "CLOSED"
 
         # 🛡️ [PHASE 6] PRO-GRADE PREV CLOSE FALLBACK CHAIN
-        meta_prev = ticker.get("official_prev") or ticker.get("regularMarketPreviousClose") or ticker.get("previousClose")
+        # Prioritize the explicitly calculated prev_close from fetch_single_symbol
+        meta_prev = ticker.get("prev_close") or ticker.get("official_prev") or ticker.get("regularMarketPreviousClose") or ticker.get("previousClose")
         
         spark_prev = None
-        for j in range(len(closes)-2, -1, -1):
-            if datetime.fromtimestamp(times[j]).date() < last_day:
-                spark_prev = closes[j]
-                break
+        if not meta_prev:
+            for j in range(len(closes)-2, -1, -1):
+                if datetime.fromtimestamp(times[j]).date() < last_day:
+                    spark_prev = closes[j]
+                    break
         
         prev_close = meta_prev or spark_prev or ticker.get("chartPreviousClose") or curr_price
         
