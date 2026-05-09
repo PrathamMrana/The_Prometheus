@@ -127,3 +127,13 @@ DerivedData
 .vscode/
 *.swp
 *.swo
+
+# Prometheus custom cache and temp files
+__pycache__
+tmp/
+scratch/
+yfinance.cache
+.prometheus_cache.json
+debug/
+tests/
+archive/

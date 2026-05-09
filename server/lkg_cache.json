@@ -72,7 +72,7 @@
     "symbol": "HDFCBANK.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406777,
+    "lkg_timestamp": 1778302697670,
     "is_lkg": true
   },
   "INFY.NS": {
@@ -148,7 +148,7 @@
     "symbol": "INFY.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406778,
+    "lkg_timestamp": 1778302697670,
     "is_lkg": true
   },
   "RELIANCE.NS": {
@@ -224,7 +224,7 @@
     "symbol": "RELIANCE.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406780,
+    "lkg_timestamp": 1778302697671,
     "is_lkg": true
   },
   "^BSESN": {
@@ -300,7 +300,7 @@
     "symbol": "^BSESN",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406782,
+    "lkg_timestamp": 1778302697671,
     "is_lkg": true
   },
   "^GSPC": {
@@ -372,7 +372,7 @@
     "symbol": "^GSPC",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302346397,
+    "lkg_timestamp": 1778302697672,
     "is_lkg": true
   },
   "^INDIAVIX": {
@@ -448,7 +448,7 @@
     "symbol": "^INDIAVIX",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406783,
+    "lkg_timestamp": 1778302697672,
     "is_lkg": true
   },
   "^IXIC": {
@@ -520,7 +520,7 @@
     "symbol": "^IXIC",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302346398,
+    "lkg_timestamp": 1778302697672,
     "is_lkg": true
   },
   "^NSEBANK": {
@@ -596,7 +596,7 @@
     "symbol": "^NSEBANK",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302346399,
+    "lkg_timestamp": 1778302697673,
     "is_lkg": true
   },
   "^NSEI": {
@@ -672,7 +672,7 @@
     "symbol": "^NSEI",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406783,
+    "lkg_timestamp": 1778302697673,
     "is_lkg": true
   },
   "^VIX": {
@@ -745,7 +745,7 @@
     "symbol": "^VIX",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302346399,
+    "lkg_timestamp": 1778302697674,
     "is_lkg": true
   },
   "ASIANPAINT.NS": {
@@ -821,7 +821,7 @@
     "symbol": "ASIANPAINT.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302374008,
+    "lkg_timestamp": 1778302725308,
     "is_lkg": true
   },
   "AXISBANK.NS": {
@@ -897,7 +897,7 @@
     "symbol": "AXISBANK.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302374010,
+    "lkg_timestamp": 1778302725310,
     "is_lkg": true
   },
   "BAJFINANCE.NS": {
@@ -964,8 +964,7 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 36.28,
-      "sectorFlow": 0.13
+      "confidence": 36.28
     },
     "anomaly": null,
     "zscore": 0.79,
@@ -974,7 +973,7 @@
     "symbol": "BAJFINANCE.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302374010,
+    "lkg_timestamp": 1778302725310,
     "is_lkg": true
   },
   "BHARTIARTL.NS": {
@@ -1041,8 +1040,7 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 8.65,
-      "sectorFlow": 0.13
+      "confidence": 8.65
     },
     "anomaly": null,
     "zscore": -0.1,
@@ -1051,7 +1049,7 @@
     "symbol": "BHARTIARTL.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302374011,
+    "lkg_timestamp": 1778302725311,
     "is_lkg": true
   },
   "HINDUNILVR.NS": {
@@ -1118,8 +1116,7 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 12.93,
-      "sectorFlow": -0.53
+      "confidence": 12.93
     },
     "anomaly": null,
     "zscore": -0.07,
@@ -1128,7 +1125,7 @@
     "symbol": "HINDUNILVR.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302374012,
+    "lkg_timestamp": 1778302725311,
     "is_lkg": true
   },
   "ICICIBANK.NS": {
@@ -1195,8 +1192,7 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 22.2,
-      "sectorFlow": -1.98
+      "confidence": 22.2
     },
     "anomaly": null,
     "zscore": 0.73,
@@ -1205,7 +1201,7 @@
     "symbol": "ICICIBANK.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406777,
+    "lkg_timestamp": 1778302725311,
     "is_lkg": true
   },
   "ITC.NS": {
@@ -1272,8 +1268,7 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 0.65,
-      "sectorFlow": -0.53
+      "confidence": 0.65
     },
     "anomaly": null,
     "zscore": -0.67,
@@ -1282,7 +1277,7 @@
     "symbol": "ITC.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302374013,
+    "lkg_timestamp": 1778302725312,
     "is_lkg": true
   },
   "KOTAKBANK.NS": {
@@ -1349,8 +1344,7 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 1.58,
-      "sectorFlow": -1.98
+      "confidence": 1.58
     },
     "anomaly": null,
     "zscore": 0.03,
@@ -1359,7 +1353,7 @@
     "symbol": "KOTAKBANK.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302374013,
+    "lkg_timestamp": 1778302725312,
     "is_lkg": true
   },
   "LT.NS": {
@@ -1426,8 +1420,7 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 24.11,
-      "sectorFlow": 0.13
+      "confidence": 24.11
     },
     "anomaly": null,
     "zscore": 0.16,
@@ -1436,7 +1429,7 @@
     "symbol": "LT.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302374014,
+    "lkg_timestamp": 1778302725313,
     "is_lkg": true
   },
   "SBIN.NS": {
@@ -1503,8 +1496,7 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 95,
-      "sectorFlow": -1.98
+      "confidence": 95
     },
     "anomaly": "CRITICAL",
     "zscore": 0.12,
@@ -1513,7 +1505,7 @@
     "symbol": "SBIN.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302374014,
+    "lkg_timestamp": 1778302725315,
     "is_lkg": true
   },
   "BAJAJFINSV.NS": {
@@ -1581,7 +1573,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 11.7,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": -0.82,
@@ -1590,7 +1582,7 @@
     "symbol": "BAJAJFINSV.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406775,
+    "lkg_timestamp": 1778302582597,
     "is_lkg": true
   },
   "HCLTECH.NS": {
@@ -1667,7 +1659,7 @@
     "symbol": "HCLTECH.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406776,
+    "lkg_timestamp": 1778302582598,
     "is_lkg": true
   },
   "MARUTI.NS": {
@@ -1744,7 +1736,7 @@
     "symbol": "MARUTI.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406778,
+    "lkg_timestamp": 1778302669732,
     "is_lkg": true
   },
   "NESTLEIND.NS": {
@@ -1821,7 +1813,7 @@
     "symbol": "NESTLEIND.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406779,
+    "lkg_timestamp": 1778302582600,
     "is_lkg": true
   },
   "NTPC.NS": {
@@ -1898,7 +1890,7 @@
     "symbol": "NTPC.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406779,
+    "lkg_timestamp": 1778302582601,
     "is_lkg": true
   },
   "POWERGRID.NS": {
@@ -1975,7 +1967,7 @@
     "symbol": "POWERGRID.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406780,
+    "lkg_timestamp": 1778302582601,
     "is_lkg": true
   },
   "SUNPHARMA.NS": {
@@ -2043,7 +2035,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 16.26,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": -2.28,
@@ -2052,7 +2044,7 @@
     "symbol": "SUNPHARMA.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406781,
+    "lkg_timestamp": 1778302582603,
     "is_lkg": true
   },
   "TITAN.NS": {
@@ -2120,7 +2112,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 92.34,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": "CRITICAL",
     "zscore": -0.28,
@@ -2129,7 +2121,7 @@
     "symbol": "TITAN.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406781,
+    "lkg_timestamp": 1778302582604,
     "is_lkg": true
   },
   "ULTRACEMCO.NS": {
@@ -2197,7 +2189,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 32.27,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": 0.25,
@@ -2206,7 +2198,7 @@
     "symbol": "ULTRACEMCO.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406781,
+    "lkg_timestamp": 1778302582604,
     "is_lkg": true
   },
   "WIPRO.NS": {
@@ -2283,7 +2275,7 @@
     "symbol": "WIPRO.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302406782,
+    "lkg_timestamp": 1778302582604,
     "is_lkg": true
   },
   "ADANIENT.NS": {
@@ -2350,7 +2342,8 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 11.19
+      "confidence": 11.19,
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": 0,
@@ -2359,7 +2352,7 @@
     "symbol": "ADANIENT.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302436748,
+    "lkg_timestamp": 1778302612196,
     "is_lkg": true
   },
   "ADANIPORTS.NS": {
@@ -2426,7 +2419,8 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 28.58
+      "confidence": 28.58,
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": -0.11,
@@ -2435,7 +2429,7 @@
     "symbol": "ADANIPORTS.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302436749,
+    "lkg_timestamp": 1778302612197,
     "is_lkg": true
   },
   "INDUSINDBK.NS": {
@@ -2502,7 +2496,8 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 0.53
+      "confidence": 0.53,
+      "sectorFlow": -1.98
     },
     "anomaly": null,
     "zscore": -1.3,
@@ -2511,7 +2506,7 @@
     "symbol": "INDUSINDBK.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302436750,
+    "lkg_timestamp": 1778302612197,
     "is_lkg": true
   },
   "JSWSTEEL.NS": {
@@ -2578,7 +2573,8 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 8.73
+      "confidence": 8.73,
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": -2.04,
@@ -2587,7 +2583,7 @@
     "symbol": "JSWSTEEL.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302436750,
+    "lkg_timestamp": 1778302612197,
     "is_lkg": true
   },
   "M&M.NS": {
@@ -2654,7 +2650,8 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 23.91
+      "confidence": 23.91,
+      "sectorFlow": 1.63
     },
     "anomaly": null,
     "zscore": -0.27,
@@ -2663,7 +2660,7 @@
     "symbol": "M&M.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302436751,
+    "lkg_timestamp": 1778302612198,
     "is_lkg": true
   },
   "ONGC.NS": {
@@ -2730,7 +2727,8 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 33.11
+      "confidence": 33.11,
+      "sectorFlow": 0.34
     },
     "anomaly": null,
     "zscore": 0.12,
@@ -2739,7 +2737,7 @@
     "symbol": "ONGC.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302436751,
+    "lkg_timestamp": 1778302669733,
     "is_lkg": true
   },
   "SBILIFE.NS": {
@@ -2807,7 +2805,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 0.11,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": -0.1,
@@ -2816,7 +2814,7 @@
     "symbol": "SBILIFE.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302289368,
+    "lkg_timestamp": 1778302639731,
     "is_lkg": true
   },
   "TATASTEEL.NS": {
@@ -2883,7 +2881,8 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 23.95
+      "confidence": 23.95,
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": 0.22,
@@ -2892,7 +2891,7 @@
     "symbol": "TATASTEEL.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302436752,
+    "lkg_timestamp": 1778302612199,
     "is_lkg": true
   },
   "TECHM.NS": {
@@ -2959,7 +2958,8 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 20.44
+      "confidence": 20.44,
+      "sectorFlow": -1.24
     },
     "anomaly": null,
     "zscore": -0.57,
@@ -2968,7 +2968,7 @@
     "symbol": "TECHM.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302436752,
+    "lkg_timestamp": 1778302612200,
     "is_lkg": true
   },
   "ADANIGREEN.NS": {
@@ -3036,7 +3036,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 17.84,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": -0.19,
@@ -3045,7 +3045,7 @@
     "symbol": "ADANIGREEN.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302289364,
+    "lkg_timestamp": 1778302639727,
     "is_lkg": true
   },
   "APOLLOHOSP.NS": {
@@ -3113,7 +3113,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 66.35,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": 0.01,
@@ -3122,7 +3122,7 @@
     "symbol": "APOLLOHOSP.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302289365,
+    "lkg_timestamp": 1778302639728,
     "is_lkg": true
   },
   "BAJAJ-AUTO.NS": {
@@ -3199,7 +3199,7 @@
     "symbol": "BAJAJ-AUTO.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302289365,
+    "lkg_timestamp": 1778302639728,
     "is_lkg": true
   },
   "BRITANNIA.NS": {
@@ -3276,7 +3276,7 @@
     "symbol": "BRITANNIA.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302289366,
+    "lkg_timestamp": 1778302639728,
     "is_lkg": true
   },
   "CIPLA.NS": {
@@ -3344,7 +3344,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 23.48,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": 0.71,
@@ -3353,7 +3353,7 @@
     "symbol": "CIPLA.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302289366,
+    "lkg_timestamp": 1778302639729,
     "is_lkg": true
   },
   "COALINDIA.NS": {
@@ -3430,7 +3430,7 @@
     "symbol": "COALINDIA.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302289367,
+    "lkg_timestamp": 1778302639729,
     "is_lkg": true
   },
   "DRREDDY.NS": {
@@ -3498,7 +3498,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 19.14,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": 0.67,
@@ -3507,7 +3507,7 @@
     "symbol": "DRREDDY.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302289367,
+    "lkg_timestamp": 1778302639730,
     "is_lkg": true
   },
   "EICHERMOT.NS": {
@@ -3584,7 +3584,7 @@
     "symbol": "EICHERMOT.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302319739,
+    "lkg_timestamp": 1778302669729,
     "is_lkg": true
   },
   "HDFCLIFE.NS": {
@@ -3652,7 +3652,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 16.91,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": -1.22,
@@ -3661,7 +3661,7 @@
     "symbol": "HDFCLIFE.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302289367,
+    "lkg_timestamp": 1778302639730,
     "is_lkg": true
   },
   "DIVISLAB.NS": {
@@ -3729,7 +3729,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 7.48,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": 0.11,
@@ -3738,7 +3738,7 @@
     "symbol": "DIVISLAB.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302319738,
+    "lkg_timestamp": 1778302669728,
     "is_lkg": true
   },
   "GRASIM.NS": {
@@ -3806,7 +3806,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 2.43,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": -1.69,
@@ -3815,7 +3815,7 @@
     "symbol": "GRASIM.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302319739,
+    "lkg_timestamp": 1778302669730,
     "is_lkg": true
   },
   "HAL.NS": {
@@ -3883,7 +3883,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 0.79,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": 0.27,
@@ -3892,7 +3892,7 @@
     "symbol": "HAL.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302319740,
+    "lkg_timestamp": 1778302669730,
     "is_lkg": true
   },
   "HEROMOTOCO.NS": {
@@ -3969,7 +3969,7 @@
     "symbol": "HEROMOTOCO.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302319741,
+    "lkg_timestamp": 1778302669731,
     "is_lkg": true
   },
   "VEDL.NS": {
@@ -4037,7 +4037,7 @@
     "signal": {
       "label": "SELL",
       "confidence": 59.88,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": 1.16,
@@ -4046,7 +4046,7 @@
     "symbol": "VEDL.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302319744,
+    "lkg_timestamp": 1778302669734,
     "is_lkg": true
   },
   "LTIM.NS": {
@@ -4141,7 +4141,7 @@
     "signal": {
       "label": "NEUTRAL",
       "confidence": 42.55,
-      "sectorFlow": 0.13
+      "sectorFlow": 0.18
     },
     "anomaly": null,
     "zscore": -0.45,
@@ -4150,7 +4150,7 @@
     "symbol": "TATACONSUM.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302289369,
+    "lkg_timestamp": 1778302639731,
     "is_lkg": true
   },
   "TCS.NS": {
@@ -4217,7 +4217,8 @@
     ],
     "signal": {
       "label": "NEUTRAL",
-      "confidence": 7.16
+      "confidence": 7.16,
+      "sectorFlow": -1.24
     },
     "anomaly": null,
     "zscore": 0.03,
@@ -4226,7 +4227,7 @@
     "symbol": "TCS.NS",
     "source": "YFINANCE",
     "status": "LIVE",
-    "lkg_timestamp": 1778302436752,
+    "lkg_timestamp": 1778302612199,
     "is_lkg": true
   }
 }

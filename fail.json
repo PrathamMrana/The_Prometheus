@@ -1,16 +1,0 @@
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   671  100   651  100    20  36231   1113 --:--:-- --:--:-- --:--:-- 39470
-HTTP/1.1 200 OK
-X-Powered-By: Express
-Access-Control-Allow-Origin: http://localhost:5173
-Vary: Origin
-Access-Control-Allow-Credentials: true
-Content-Type: application/json; charset=utf-8
-Content-Length: 651
-ETag: W/"28b-QYbKOx1S8dJJfvcOcJ37T1PJS50"
-Date: Mon, 06 Apr 2026 18:58:50 GMT
-Connection: keep-alive
-Keep-Alive: timeout=5
-
-{"success":true,"data":[{"symbol":"HDFCBANK.NS","signal":"HOLD","label":"NEUTRAL","confidence":0.536,"state":"NEUTRAL","score":0.01,"quality":92,"tradable":false,"breakdown":{"ml":0.54,"momentum":0.5,"volatility":0.5,"volume":0.5}},{"symbol":"ICICIBANK.NS","signal":"HOLD","label":"NEUTRAL","confidence":0.256,"state":"NEUTRAL","score":0.01,"quality":96,"tradable":false,"breakdown":{"ml":0.26,"momentum":0.5,"volatility":0.5,"volume":0.5}},{"symbol":"KOTAKBANK.NS","signal":"HOLD","label":"NEUTRAL","confidence":0.142,"state":"NEUTRAL","score":0.01,"quality":92,"tradable":false,"breakdown":{"ml":0.14,"momentum":0.5,"volatility":0.5,"volume":0.5}}]}

@@ -40,17 +40,17 @@
       "stale": true,
       "regime": "SIDEWAYS",
       "marketEntropy": 0.475,
-      "momentumScore": 60.2,
+      "momentumScore": 61.4,
       "volatilityScore": 50,
       "smartMoneyScore": 41.7,
       "breakoutScore": 30,
-      "volumeScore": 51,
+      "volumeScore": 51.5,
       "edgeScore": 0,
-      "rawScore": 60.2,
+      "rawScore": 61.4,
       "entropyPenalty": 9.5,
-      "adjustedScore": 11.4,
-      "confidenceScore": 57.6,
-      "score": 49.994163020031124,
+      "adjustedScore": 11.8,
+      "confidenceScore": 55,
+      "score": 50.2866740500223,
       "confidenceGrade": "F",
       "conviction": "NO_EDGE",
       "decision": "LOW_CONVICTION",
@@ -64,8 +64,8 @@
         "participationStrength": "NORMAL",
         "liquiditySweepDetected": false,
         "institutionalBias": "SHORT",
-        "vr": 1.02,
-        "score": 41.67
+        "vr": 1.03,
+        "score": 41.74
       },
       "liquidityState": "NORMAL",
       "slippage": {
@@ -85,14 +85,14 @@
         {
           "code": "STALE_DATA",
           "label": "Stale Feed",
-          "desc": "Data is 49109s old — signal may be stale",
+          "desc": "Data is 49372s old — signal may be stale",
           "impact": -10
         }
       ],
       "boosts": [],
       "adjustment": -10,
       "rationale": [
-        "Data is 49109s old — signal may be stale"
+        "Data is 49372s old — signal may be stale"
       ],
       "riskFlags": [
         "STALE_FEED"
@@ -103,13 +103,13 @@
         "tier": 5
       },
       "status": "READY",
-      "traceId": "b8d427a0-78f7-4c9a-96b1-b6a287b99a30",
+      "traceId": "07cacaea-3240-44ba-b306-87e0cb95b85f",
       "indicators": {
         "rsi": 39.45,
         "momentum": 0,
         "ema20": 780.8501,
-        "ema50": 780.8877,
-        "atr": 1.6975
+        "ema50": 780.8763,
+        "atr": 1.6987
       },
       "smClassification": "PASSIVE_SELLING"
     },
@@ -194,17 +194,17 @@
       "stale": true,
       "regime": "SIDEWAYS",
       "marketEntropy": 0.475,
-      "momentumScore": 67.1,
+      "momentumScore": 66.4,
       "volatilityScore": 50,
-      "smartMoneyScore": 42.3,
+      "smartMoneyScore": 40.5,
       "breakoutScore": 30,
-      "volumeScore": 52,
+      "volumeScore": 49.5,
       "edgeScore": 0,
-      "rawScore": 67.1,
+      "rawScore": 66.4,
       "entropyPenalty": 9.5,
-      "adjustedScore": 13.4,
-      "confidenceScore": 56.8,
-      "score": 54.04499118843856,
+      "adjustedScore": 11.8,
+      "confidenceScore": 58.8,
+      "score": 53.78386852478,
       "confidenceGrade": "F",
       "conviction": "NO_EDGE",
       "decision": "LOW_CONVICTION",
@@ -215,11 +215,11 @@
         "flowType": "PASSIVE_SELLING",
         "accumulationScore": 0,
         "distributionScore": 20,
-        "participationStrength": "NORMAL",
+        "participationStrength": "LOW",
         "liquiditySweepDetected": false,
         "institutionalBias": "SHORT",
-        "vr": 1.04,
-        "score": 42.34
+        "vr": 0.99,
+        "score": 40.47
       },
       "liquidityState": "NORMAL",
       "slippage": {
@@ -239,14 +239,14 @@
         {
           "code": "STALE_DATA",
           "label": "Stale Feed",
-          "desc": "Data is 49109s old — signal may be stale",
+          "desc": "Data is 49372s old — signal may be stale",
           "impact": -10
         }
       ],
       "boosts": [],
       "adjustment": -10,
       "rationale": [
-        "Data is 49109s old — signal may be stale"
+        "Data is 49372s old — signal may be stale"
       ],
       "riskFlags": [
         "STALE_FEED"
@@ -257,13 +257,13 @@
         "tier": 5
       },
       "status": "READY",
-      "traceId": "11e842d1-6d72-4b6f-83ca-844280088332",
+      "traceId": "7b8a9959-2a20-4fb4-8664-939923040155",
       "indicators": {
         "rsi": 61.19,
         "momentum": 0,
-        "ema20": 1179.1988,
-        "ema50": 1178.9137,
-        "atr": 1.6995
+        "ema20": 1179.1995,
+        "ema50": 1179.0003,
+        "atr": 1.6998
       },
       "smClassification": "PASSIVE_SELLING"
     },
@@ -348,17 +348,17 @@
       "stale": true,
       "regime": "SIDEWAYS",
       "marketEntropy": 0.475,
-      "momentumScore": 65.9,
+      "momentumScore": 68.8,
       "volatilityScore": 50,
-      "smartMoneyScore": 38,
+      "smartMoneyScore": 42.6,
       "breakoutScore": 30,
-      "volumeScore": 46.5,
+      "volumeScore": 52.5,
       "edgeScore": 0,
-      "rawScore": 65.9,
+      "rawScore": 68.8,
       "entropyPenalty": 9.5,
-      "adjustedScore": 11.6,
-      "confidenceScore": 55.6,
-      "score": 53.0065024580879,
+      "adjustedScore": 13.8,
+      "confidenceScore": 59.8,
+      "score": 54.04250189481254,
       "confidenceGrade": "F",
       "conviction": "NO_EDGE",
       "decision": "LOW_CONVICTION",
@@ -369,11 +369,11 @@
         "flowType": "PASSIVE_SELLING",
         "accumulationScore": 0,
         "distributionScore": 20,
-        "participationStrength": "LOW",
+        "participationStrength": "NORMAL",
         "liquiditySweepDetected": false,
         "institutionalBias": "SHORT",
-        "vr": 0.93,
-        "score": 37.99
+        "vr": 1.05,
+        "score": 42.63
       },
       "liquidityState": "NORMAL",
       "slippage": {
@@ -393,14 +393,14 @@
         {
           "code": "STALE_DATA",
           "label": "Stale Feed",
-          "desc": "Data is 49109s old — signal may be stale",
+          "desc": "Data is 49372s old — signal may be stale",
           "impact": -10
         }
       ],
       "boosts": [],
       "adjustment": -10,
       "rationale": [
-        "Data is 49109s old — signal may be stale"
+        "Data is 49372s old — signal may be stale"
       ],
       "riskFlags": [
         "STALE_FEED"
@@ -411,13 +411,13 @@
         "tier": 5
       },
       "status": "READY",
-      "traceId": "8b39f668-867d-43ac-8b11-5f53d08b83dd",
+      "traceId": "1b3360ef-61f5-4040-a4d7-529f12ba41e8",
       "indicators": {
         "rsi": 57.76,
         "momentum": 0,
-        "ema20": 1435.1983,
-        "ema50": 1434.8056,
-        "atr": 2.9995
+        "ema20": 1435.1993,
+        "ema50": 1434.9248,
+        "atr": 2.9997
       },
       "smClassification": "PASSIVE_SELLING"
     },
@@ -1065,20 +1065,20 @@
       "stale": true,
       "regime": "SIDEWAYS",
       "marketEntropy": 0.475,
-      "momentumScore": 69.9,
+      "momentumScore": 69.1,
       "volatilityScore": 50,
-      "smartMoneyScore": 42.3,
+      "smartMoneyScore": 38.2,
       "breakoutScore": 30,
-      "volumeScore": 52,
+      "volumeScore": 46.5,
       "edgeScore": 0,
-      "rawScore": 69.9,
+      "rawScore": 69.1,
       "entropyPenalty": 9.5,
-      "adjustedScore": 14.1,
-      "confidenceScore": 58.7,
-      "score": 55.144430199587966,
+      "adjustedScore": 12.4,
+      "confidenceScore": 54.5,
+      "score": 52.465317439298516,
       "confidenceGrade": "F",
       "conviction": "NO_EDGE",
-      "decision": "LOW_CONVICTION",
+      "decision": "HOLD",
       "signal": "LOW_CONVICTION",
       "breakout": false,
       "trendDirection": "neutral",
@@ -1086,11 +1086,11 @@
         "flowType": "PASSIVE_SELLING",
         "accumulationScore": 0,
         "distributionScore": 20,
-        "participationStrength": "NORMAL",
+        "participationStrength": "LOW",
         "liquiditySweepDetected": false,
         "institutionalBias": "SHORT",
-        "vr": 1.04,
-        "score": 42.29
+        "vr": 0.93,
+        "score": 38.16
       },
       "liquidityState": "NORMAL",
       "slippage": {
@@ -1110,31 +1110,31 @@
         {
           "code": "STALE_DATA",
           "label": "Stale Feed",
-          "desc": "Data is 49109s old — signal may be stale",
+          "desc": "Data is 49372s old — signal may be stale",
           "impact": -10
         }
       ],
       "boosts": [],
       "adjustment": -10,
       "rationale": [
-        "Data is 49109s old — signal may be stale"
+        "Data is 49372s old — signal may be stale"
       ],
       "riskFlags": [
         "STALE_FEED"
       ],
-      "tradeGrade": "C",
+      "tradeGrade": "D",
       "rarity": {
         "label": "WEAK_SIGNAL",
         "tier": 5
       },
       "status": "READY",
-      "traceId": "e61ea8a2-1c8d-40dc-b9fc-897a546050ba",
+      "traceId": "99567ec3-c765-4813-8fb6-d240664ac29d",
       "indicators": {
         "rsi": 63.05,
         "momentum": 0,
-        "ema20": 2600.0972,
-        "ema50": 2599.4737,
-        "atr": 6.5945
+        "ema20": 2600.0989,
+        "ema50": 2599.6631,
+        "atr": 6.5972
       },
       "smClassification": "PASSIVE_SELLING"
     },
@@ -1219,17 +1219,17 @@
       "stale": true,
       "regime": "SIDEWAYS",
       "marketEntropy": 0.475,
-      "momentumScore": 61.5,
+      "momentumScore": 61,
       "volatilityScore": 50,
-      "smartMoneyScore": 42.4,
+      "smartMoneyScore": 39.2,
       "breakoutScore": 30,
-      "volumeScore": 52,
+      "volumeScore": 48,
       "edgeScore": 0,
-      "rawScore": 61.5,
+      "rawScore": 61,
       "entropyPenalty": 9.5,
-      "adjustedScore": 11.8,
-      "confidenceScore": 58.5,
-      "score": 50.77475356231751,
+      "adjustedScore": 10.4,
+      "confidenceScore": 57,
+      "score": 48.76095335591892,
       "confidenceGrade": "F",
       "conviction": "NO_EDGE",
       "decision": "LOW_CONVICTION",
@@ -1240,11 +1240,11 @@
         "flowType": "PASSIVE_SELLING",
         "accumulationScore": 0,
         "distributionScore": 20,
-        "participationStrength": "NORMAL",
+        "participationStrength": "LOW",
         "liquiditySweepDetected": false,
         "institutionalBias": "SHORT",
-        "vr": 1.04,
-        "score": 42.43
+        "vr": 0.96,
+        "score": 39.22
       },
       "liquidityState": "NORMAL",
       "slippage": {
@@ -1264,14 +1264,14 @@
         {
           "code": "STALE_DATA",
           "label": "Stale Feed",
-          "desc": "Data is 49109s old — signal may be stale",
+          "desc": "Data is 49372s old — signal may be stale",
           "impact": -10
         }
       ],
       "boosts": [],
       "adjustment": -10,
       "rationale": [
-        "Data is 49109s old — signal may be stale"
+        "Data is 49372s old — signal may be stale"
       ],
       "riskFlags": [
         "STALE_FEED"
@@ -1282,13 +1282,13 @@
         "tier": 5
       },
       "status": "READY",
-      "traceId": "c9e0cc35-c42f-4e6f-8028-b57e058d6103",
+      "traceId": "46e30bd6-bd0f-4935-88fd-cc5e34acb897",
       "indicators": {
         "rsi": 42.24,
         "momentum": 0,
-        "ema20": 1268.3009,
-        "ema50": 1268.4775,
-        "atr": 3.1964
+        "ema20": 1268.3004,
+        "ema50": 1268.4238,
+        "atr": 3.1982
       },
       "smClassification": "PASSIVE_SELLING"
     },
