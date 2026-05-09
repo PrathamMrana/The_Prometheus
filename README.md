@@ -18,7 +18,7 @@
 
 ## Live Demo
 
-- **Frontend:** https://your-vercel-link.vercel.app *(deploy on Vercel — see below)*
+- **Frontend:** https://the-prometheus.vercel.app
 - **Backend/API:** https://prometheus-api-zbgy.onrender.com
 
 ---
