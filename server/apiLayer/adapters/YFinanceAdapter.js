@@ -106,20 +106,36 @@ class YFinanceAdapter extends BaseAdapter {
 
         return new Promise((resolve, reject) => {
             // 🛡️ [PHASE 21] Bridge Concurrency Lock
-            // Since we only have ONE bridge, we must wait if it's busy.
-            // In worker.js, we fetch in chunks anyway.
             if (currentResolve) {
                 return setTimeout(() => resolve(this.getPrices(symbols)), 100);
             }
 
-            currentResolve = resolve;
-            currentReject = reject;
+            const timeout = setTimeout(() => {
+                if (currentResolve === resolve) {
+                    currentResolve = null;
+                    currentReject = null;
+                    reject(new Error('BRIDGE_TIMEOUT: Python daemon unresponsive'));
+                }
+            }, 15000);
+
+            currentResolve = (data) => {
+                clearTimeout(timeout);
+                resolve(data);
+            };
+            currentReject = (err) => {
+                clearTimeout(timeout);
+                reject(err);
+            };
             
             try {
+                if (!bridgeProcess || bridgeProcess.killed) {
+                    this._initBridge();
+                    throw new Error('BRIDGE_RESTARTING: Process was dead');
+                }
                 bridgeProcess.stdin.write(JSON.stringify({ symbols: normalized }) + '\n');
             } catch (e) {
                 console.error('[BRIDGE_WRITE_ERROR]', e.message);
-                reject(e);
+                currentReject(e);
             }
         });
     }

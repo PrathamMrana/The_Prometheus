@@ -1,6 +1,4 @@
-yfinance>=0.2.36
-pandas>=2.0.0
-numpy>=1.26.0
-scikit-learn>=1.4.0
-# tensorflow>=2.15.0
-# Optimized for Render/Docker
+# 🔱 [PHASE 21] ZERO-WEIGHT PIPELINE (Render Optimized)
+requests>=2.31.0
+# curl_cffi>=0.6.2  # Optional but recommended for anti-bot
+# yfinance, pandas, numpy removed to minimize footprint
