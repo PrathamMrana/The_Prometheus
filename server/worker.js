@@ -113,7 +113,7 @@ function updateHistory(symbol, tick) {
         timestamp: tick.timestamp
     });
 
-    if (arr.length > 80) arr.shift(); // 🛡️ [RENDER] Bound to 80 (was 300) to stay within 512MB free tier
+    if (arr.length > 40) arr.shift(); // 🛡️ [RENDER] Bound to 40 (was 300) to stay within 512MB free tier
 }
 
 /**

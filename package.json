@@ -9,7 +9,7 @@
     "server": "node --expose-gc server/index.js",
     "dev": "npm run kill-port && concurrently \"npm run server\" \"npm run start\"",
     "build": "cd frontend && npm run build",
-    "start:prod": "node server/index.js"
+    "start:prod": "node --max-old-space-size=400 --expose-gc server/index.js"
   },
   "keywords": [],
   "author": "",

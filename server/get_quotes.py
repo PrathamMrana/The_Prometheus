@@ -2,10 +2,10 @@ import sys
 import json
 import random
 import time
-import pandas as pd
 import numpy as np
 import yfinance as yf
 import warnings
+import gc
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 
@@ -370,13 +370,10 @@ def get_quotes(input_symbols):
                 if base_sym in sc_stocks:
                     sector_changes[sector].append(pct_change)
 
-        # 🛡️ [PHASE 10.5] OHLC Vector Extraction
-        highs = [h for h in ticker.get("high", []) if h is not None]
-        lows  = [l for l in ticker.get("low", []) if l is not None]
-
+        # 🛡️ [PHASE 10.5] OHLC Vector Extraction (Reduced for memory)
         results_raw.append({
             "symbol": sym, "price": curr_price, "prev_close": prev_close,
-            "pct_change": pct_change, "closes": closes, "highs": highs, "lows": lows, "times": times,
+            "pct_change": pct_change, "session_closes": session_closes,
             "volumes": ticker.get("volumes", []),
             "last_day": last_day, "is_active": is_active_symbol(ticker), "market_status": market_status,
             "volume": ticker.get("volume", 0), "data_timestamp": ticker.get("data_timestamp")
@@ -412,19 +409,21 @@ def get_quotes(input_symbols):
         elif regime == "BULLISH" and (pct and pct > 2): label = "BUY"
         confidence = round(min(95.0, abs(pct or 0) * 20), 2)
         
-        # Anomaly Detection
-        session_closes = [c for i, c in enumerate(q["closes"]) if datetime.fromtimestamp(q["times"][i]).date() == q["last_day"]]
-        if len(session_closes) < 10: session_closes = q["closes"][-40:]
+        # 🛡️ [MEMORY OPTIMIZATION] Native Z-Score (Avoid Pandas overhead)
+        session_closes = q["session_closes"]
+        if len(session_closes) < 10: session_closes = session_closes[-40:]
         
-        df = pd.DataFrame({"Close": session_closes})
         zscore = 0
-        if len(df) > 10:
-            rets = df["Close"].pct_change()
-            m, s = rets.mean(), rets.std()
-            zscore = round((rets.iloc[-1] - m) / s, 2) if s > 0 else 0
-
-        # if ta: # indicator logic guard example
-        #    df.ta.rsi(...)
+        if len(session_closes) > 10:
+            try:
+                # Use simple numpy for performance and lower overhead than pandas
+                prices = np.array(session_closes, dtype=float)
+                rets = np.diff(prices) / (prices[:-1] + 1e-9)
+                m = np.mean(rets)
+                s = np.std(rets)
+                zscore = round((rets[-1] - m) / s, 2) if s > 0.0001 else 0
+            except:
+                zscore = 0
 
         anomaly = "CRITICAL" if (pct and abs(pct) > 4 or abs(zscore) > 2.5) else None
         
@@ -445,25 +444,21 @@ def get_quotes(input_symbols):
 
         # Ensure volume_sparkline matches the length and period of session_closes (sparkline)
         volume_sparkline = []
-        if q.get("volumes") and len(q["volumes"]) >= len(q["closes"]):
-            # session_closes is session-filtered from q["closes"]
-            # We must apply the same filter to q["volumes"]
-            full_vols = q["volumes"]
-            session_vols = [full_vols[i] for i, c in enumerate(q["closes"]) if datetime.fromtimestamp(q["times"][i]).date() == q["last_day"]]
-            volume_sparkline = session_vols[-40:]
+        if q.get("volumes"):
+            volume_sparkline = [float(v) for v in q["volumes"][-40:]]
 
         final_quotes.append({
             "symbol": q["symbol"], "price": round(q["price"], 2), "prev_close": round(q["prev_close"], 2),
-            "high": round(q["highs"][-1], 2) if q["highs"] else round(q["price"], 2),
-            "low": round(q["lows"][-1], 2) if q["lows"] else round(q["price"], 2),
             "pct_change": pct, "priority": priority, "volume": q.get("volume", 0),
             "volume_history": volume_sparkline,
-            "sparkline": [round(c, 2) for c in session_closes[-40:]],
+            "sparkline": [round(float(c), 2) for c in session_closes[-40:]],
             "timestamp": q.get("data_timestamp") or 0, "status": q["market_status"],
             "signal": {"label": label, "confidence": confidence},
             "anomaly": anomaly, "zscore": zscore,
             "sector": assigned_sector
         })
+    
+    gc.collect() # Force cleanup before final JSON dump
 
     # --- SECTOR TRENDS & MOVERS ---
     sector_flow_raw = {s: round(np.mean(v), 2) if v else 0.0 for s, v in sector_changes.items()}
