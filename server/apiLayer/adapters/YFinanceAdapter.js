@@ -1,6 +1,7 @@
 const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const BaseAdapter = require('./BaseAdapter');
 
 /**
  * 🔱 [PHASE 21] PERSISTENT PYTHON BRIDGE
