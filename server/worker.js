@@ -1220,11 +1220,20 @@ SafeMode: ${SYSTEM_STATE.SAFE_MODE ? 'ON' : 'OFF'}
 
             // 🚀 [PHASE 8 & 23] DYNAMIC DELAY (Market State Aware)
             const marketClosed = isNSEMarketClosed();
-            let baseDelay = marketClosed ? 20000 : 2000; // 🔱 [PHASE 21] 2s live (High Fidelity), 20s closed
+            // 🔱 [PHASE 21] 5s live (Optimized for Render Free Tier), 20s closed
+            let baseDelay = marketClosed ? 20000 : 5000; 
 
             if (SYSTEM_STATE.SAFE_MODE || lastCycleHadTimeout) {
-                baseDelay = marketClosed ? 30000 : 10000;
+                baseDelay = marketClosed ? 30000 : 15000;
             }
+
+            // 🛡️ [PHASE 21] PROACTIVE MEMORY RECLAMATION
+            // If we are approaching the Render 512MB limit, force a GC cycle.
+            if (typeof global.gc === 'function' && mem.rss > 350 * 1024 * 1024) {
+                console.warn(`[MEM_GUARD] RSS: ${(mem.rss / 1024 / 1024).toFixed(2)} MB. Triggering manual GC...`);
+                global.gc();
+            }
+
             clearTimeout(loopTimeout);
             loopTimeout = setTimeout(runCycle, baseDelay);
             console.timeEnd('cycle');

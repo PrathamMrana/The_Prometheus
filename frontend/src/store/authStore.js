@@ -34,6 +34,7 @@ function getSavedUser() {
 // ─── Zustand store ────────────────────────────────────────────────────────────
 export const useAuthStore = create((set, get) => ({
     user:           getSavedUser(),
+    accessToken:    getAccessToken(),
     isAuthenticated: !!getSavedUser(),
     isLoading:      false,
     error:          null,
@@ -51,7 +52,7 @@ export const useAuthStore = create((set, get) => ({
             const data = await res.json();
             if (!res.ok) throw new Error(data.message || 'Registration failed.');
             saveTokens(data.accessToken, data.refreshToken, data.user);
-            set({ user: data.user, isAuthenticated: true, isLoading: false });
+            set({ user: data.user, accessToken: data.accessToken, isAuthenticated: true, isLoading: false });
             return { success: true };
         } catch (e) {
             set({ isLoading: false, error: e.message });
@@ -71,7 +72,7 @@ export const useAuthStore = create((set, get) => ({
             const data = await res.json();
             if (!res.ok) throw new Error(data.message || 'Login failed.');
             saveTokens(data.accessToken, data.refreshToken, data.user);
-            set({ user: data.user, isAuthenticated: true, isLoading: false });
+            set({ user: data.user, accessToken: data.accessToken, isAuthenticated: true, isLoading: false });
             return { success: true };
         } catch (e) {
             set({ isLoading: false, error: e.message });
@@ -84,7 +85,7 @@ export const useAuthStore = create((set, get) => ({
         const refreshToken = getRefreshToken();
         const savedUser    = getSavedUser();
         if (!refreshToken || !savedUser) {
-            set({ isRestoring: false, isAuthenticated: false, user: null });
+            set({ isRestoring: false, isAuthenticated: false, user: null, accessToken: null });
             return;
         }
         try {
@@ -93,19 +94,18 @@ export const useAuthStore = create((set, get) => ({
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ refreshToken })
             });
-            // 🛡️ [PHASE 21] Silently clear stale tokens on 401 — no rethrow,
-            // which prevents the browser from logging a red network error.
+            // 🛡️ [PHASE 21] Silently clear stale tokens on 401
             if (!res.ok) {
                 clearTokens();
-                set({ user: null, isAuthenticated: false, isRestoring: false });
+                set({ user: null, accessToken: null, isAuthenticated: false, isRestoring: false });
                 return;
             }
             const data = await res.json();
             saveTokens(data.accessToken, data.refreshToken, data.user);
-            set({ user: data.user, isAuthenticated: true, isRestoring: false });
+            set({ user: data.user, accessToken: data.accessToken, isAuthenticated: true, isRestoring: false });
         } catch {
             clearTokens();
-            set({ user: null, isAuthenticated: false, isRestoring: false });
+            set({ user: null, accessToken: null, isAuthenticated: false, isRestoring: false });
         }
     },
 
@@ -113,7 +113,7 @@ export const useAuthStore = create((set, get) => ({
     logout: async () => {
         const refreshToken = getRefreshToken();
         clearTokens();
-        set({ user: null, isAuthenticated: false });
+        set({ user: null, accessToken: null, isAuthenticated: false });
         try {
             await fetch(`${API}/auth/logout`, {
                 method: 'POST',

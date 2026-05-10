@@ -129,12 +129,25 @@ export const useWebSocket = (url) => {
             : (window.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.host;
 
           const token = useAuthStore.getState().accessToken;
+          if (!token) {
+            console.warn('[WS] Connection deferred: Access token is missing or restoring.');
+            return null;
+          }
           return `${base}${url}?token=${token}`;
         })()
       : (() => {
           const token = useAuthStore.getState().accessToken;
+          if (!token) {
+            console.warn('[WS] Connection deferred: Access token is missing or restoring.');
+            return null;
+          }
           return `${url}?token=${token}`;
         })();
+
+    if (!wsUrl) {
+        isConnecting.current = false;
+        return;
+    }
 
     ws.current = new WebSocket(wsUrl);
 
