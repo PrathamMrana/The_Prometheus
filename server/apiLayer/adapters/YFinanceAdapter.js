@@ -1,34 +1,101 @@
-/**
- * YFinanceAdapter - Python Bridge for High-Reliability Fallback Data.
- * Uses get_quotes.py to fetch data via yfinance.
- */
-const BaseAdapter = require('./BaseAdapter');
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 const path = require('path');
+const fs = require('fs');
+
+/**
+ * 🔱 [PHASE 21] PERSISTENT PYTHON BRIDGE
+ * Maintains a single long-lived process to avoid library load overhead (OOM mitigation).
+ */
+let bridgeProcess = null;
+let currentResolve = null;
+let currentReject = null;
 
 class YFinanceAdapter extends BaseAdapter {
     constructor() {
-        super('YFINANCE', 'NONE'); // No API key needed for yfinance
-        // Use project venv first, fall back to Anaconda if venv missing
+        super('YFINANCE', 'NONE');
         const venvPy = path.join(__dirname, '../../venv/bin/python3');
-        const { existsSync } = require('fs');
-        this.pyPath = existsSync(venvPy) ? venvPy : process.env.PYTHON_PATH || 'python3';
+        this.pyPath = fs.existsSync(venvPy) ? venvPy : process.env.PYTHON_PATH || 'python3';
         this.scriptPath = path.join(__dirname, '../../get_quotes.py');
+        this._initBridge();
     }
 
-    async getPrice(symbol) {
-        const results = await this.getPrices([symbol]);
-        return results ? results[symbol] : null;
+    _initBridge() {
+        if (bridgeProcess) return;
+
+        console.log('🚀 [BRIDGE] Initializing Persistent Python Daemon...');
+        bridgeProcess = spawn(this.pyPath, [this.scriptPath, '--persistent'], {
+            env: { ...process.env, PYTHONUNBUFFERED: '1' }
+        });
+
+        bridgeProcess.stdout.on('data', (data) => {
+            const raw = data.toString();
+            try {
+                // Split by newline in case multiple JSONs came in (though unlikely with current protocol)
+                const lines = raw.split('\n').filter(l => l.trim());
+                for (const line of lines) {
+                    const parsed = JSON.parse(line);
+                    
+                    // Handle 'READY' signal
+                    if (parsed.status === 'READY') {
+                        console.log('✅ [BRIDGE] Python Daemon READY.');
+                        continue;
+                    }
+
+                    if (currentResolve) {
+                        const results = this._processPayload(parsed);
+                        currentResolve(results);
+                        currentResolve = null;
+                        currentReject = null;
+                    }
+                }
+            } catch (e) {
+                console.error(`[BRIDGE_PARSE_ERROR] ${e.message} | RAW: ${raw.substring(0, 100)}`);
+                if (currentReject) currentReject(e);
+            }
+        });
+
+        bridgeProcess.stderr.on('data', (data) => {
+            const err = data.toString();
+            if (err.includes('Error fetching')) {
+                // Individual symbol errors are handled, don't crash the bridge
+                return;
+            }
+            console.error(`[BRIDGE_STDERR] ${err}`);
+        });
+
+        bridgeProcess.on('close', (code) => {
+            console.warn(`💀 [BRIDGE] Process exited with code ${code}. Restarting...`);
+            bridgeProcess = null;
+            if (currentReject) currentReject(new Error('Bridge died'));
+            setTimeout(() => this._initBridge(), 1000);
+        });
     }
 
-    /**
-     * 🚀 [BATCH] INSTITUTIONAL CHUNKED FETCH (Stealth Mode)
-     * Consolidates multiple tickers into small, rate-limit resistant chunks.
-     */
+    _processPayload(parsed) {
+        const resultsArray = parsed.quotes || [];
+        const mapped = {};
+        resultsArray.forEach(data => {
+            mapped[data.symbol] = this.standardize({
+                price: data.price,
+                pct_change: data.pct_change,
+                prevClose: data.prev_close,
+                priority: data.priority || "NORMAL",
+                volume: data.volume,
+                volume_history: data.volume_history || [],
+                sparkline: data.sparkline || [],
+                signal: data.signal,
+                anomaly: data.anomaly,
+                zscore: data.zscore,
+                sector: data.sector,
+                timestamp: data.timestamp
+            }, data.symbol);
+        });
+        return { quotes: mapped, global: parsed.global || {} };
+    }
+
     async getPrices(symbols) {
-        if (!symbols || symbols.length === 0) return {};
+        if (!symbols || symbols.length === 0) return { quotes: {}, global: {} };
         
-        // 🛡️ [STEP 1] INSTITUTIONAL SYMBOL NORMALIZATION
         const normalized = symbols.map(s => {
             const sym = s.trim().toUpperCase();
             if (sym.includes(".") || sym.startsWith("^")) return sym;
@@ -36,98 +103,32 @@ class YFinanceAdapter extends BaseAdapter {
             return `${sym}.NS`;
         });
 
-        // 🛡️ [STEP 2] SINGLE BATCH EXECUTION (NO CHUNKING)
-        // Ensure SINGLE complete payload for accurate GLOBAL STATE
-        // [STABILITY] Processing chunked batch...
-        // console.log(`[STEALTH BATCH] Processing ${normalized.length} tickers in ONE unified segment...`);
-        try {
-            return await this.executePythonBatch(normalized.join(','), normalized.length);
-        } catch (e) {
-            console.error(`[STEALTH BATCH FAIL] Unified execution blocked: ${e.message}`);
-            return { quotes: {}, global: {} };
-        }
-    }
-
-    /**
-     * Internal Python Execution Bridge (with Header Rotation & Retries)
-     */
-    async executePythonBatch(symString, expectedCount) {
-        let lastError;
-        for (let i = 0; i < 3; i++) {
-            try {
-                return await this._runPython(symString);
-            } catch (e) {
-                lastError = e;
-                const delay = 300 + Math.random() * 500;
-                console.warn(`[YF_RETRY] Attempt ${i+1} failed. Retrying in ${Math.round(delay)}ms...`);
-                await new Promise(r => setTimeout(r, delay));
-            }
-        }
-        throw lastError;
-    }
-
-    _runPython(symString) {
         return new Promise((resolve, reject) => {
-            const uas = [
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/121.0",
-                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
-                "Mozilla/5.0 (iPhone; CPU iPhone OS 17_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1.2 Mobile/15E148 Safari/604.1"
-            ];
-            const ua = uas[Math.floor(Math.random() * uas.length)];
-            const cmd = `${this.pyPath} ${this.scriptPath} "${symString}"`;
+            // 🛡️ [PHASE 21] Bridge Concurrency Lock
+            // Since we only have ONE bridge, we must wait if it's busy.
+            // In worker.js, we fetch in chunks anyway.
+            if (currentResolve) {
+                return setTimeout(() => resolve(this.getPrices(symbols)), 100);
+            }
+
+            currentResolve = resolve;
+            currentReject = reject;
             
-        exec(cmd, { env: { ...process.env, USER_AGENT: ua } }, (error, stdout, stderr) => {
             try {
-                // 🔱 [FORENSIC LOG] Capture raw python output for diagnostic purposes
-                // console.log(`[YF_RAW_DEBUG] | Symbols: ${symString} | Length: ${stdout?.length}`);
-                
-                // 🔱 [FIX] Extract only the JSON payload, ignoring yfinance terminal warnings (like 'symbol delisted')
-                const jsonStart = stdout.indexOf('{"quotes":');
-                if (jsonStart === -1) {
-                    console.error(`[YF_DATA_ERROR] JSON payload not found. Raw output: ${stdout.substring(0, 500)}...`);
-                    throw new Error("JSON payload not found in python output");
-                }
-                
-                const cleanJson = stdout.substring(jsonStart);
-                const parsed = JSON.parse(cleanJson);
-                const resultsArray = parsed.quotes || [];
-                    const mapped = {};
-                    
-                    resultsArray.forEach(data => {
-                        mapped[data.symbol] = this.standardize({
-                            price: data.price,
-                            high: data.high,
-                            low: data.low,
-                            percent: data.pct_change,
-                            pct_change: data.pct_change, // 🔱 [FIX] Map both for schema safety
-                            prevClose: data.prev_close,
-                            priority: data.priority || "NORMAL",
-                            volume: data.volume,
-                            volume_history: data.volume_history || [],
-                            sparkline: data.sparkline || [],
-                            signal: data.signal,
-                            anomaly: data.anomaly,
-                            zscore: data.zscore,
-                            sector: data.sector,
-                            timestamp: data.timestamp // 🔱 [Purity Lock] Use real market timestamp
-                        }, data.symbol);
-                    });
-                    
-                    resolve({
-                        quotes: mapped,
-                        global: parsed.global || {}
-                    });
-                } catch (e) {
-                    reject(new Error(`Parse error: ${e.message}`));
-                }
-            });
+                bridgeProcess.stdin.write(JSON.stringify({ symbols: normalized }) + '\n');
+            } catch (e) {
+                console.error('[BRIDGE_WRITE_ERROR]', e.message);
+                reject(e);
+            }
         });
     }
 
-    async getQuote(symbol) {
-        return this.getPrice(symbol);
+    async getPrice(symbol) {
+        const res = await this.getPrices([symbol]);
+        return res.quotes[symbol] || null;
     }
+
+    async getQuote(symbol) { return this.getPrice(symbol); }
 }
 
 module.exports = YFinanceAdapter;

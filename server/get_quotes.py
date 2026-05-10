@@ -514,23 +514,51 @@ def safe_print(data):
             pass
         sys.exit(0)
 
+def run_persistent():
+    """🛡️ [PHASE 21] Long-Lived Bridge Mode - Zero-Overhead Lifecycle"""
+    # Force immediate flush for Node.js compatibility
+    sys.stdout.write(json.dumps({"status": "READY"}) + "\n")
+    sys.stdout.flush()
+    
+    while True:
+        try:
+            line = sys.stdin.readline()
+            if not line: break
+            
+            cmd = json.loads(line)
+            symbols = cmd.get("symbols", [])
+            
+            if not symbols:
+                safe_print({"quotes": [], "global": {}})
+                continue
+                
+            output = get_quotes(symbols)
+            safe_print(output)
+            
+            # 🛡️ Periodic GC in persistent mode
+            gc.collect()
+            
+        except Exception as e:
+            safe_print({"error": str(e), "quotes": []})
+
 if __name__ == "__main__":
     # --- GLOBAL FAIL-SAFE WRAPPER ---
     try:
+        # 🔱 [PHASE 21] PERSISTENT MODE CHECK
+        if "--persistent" in sys.argv:
+            run_persistent()
+            sys.exit(0)
+
         if len(sys.argv) < 2:
             safe_print({"error": "No symbols provided"})
             sys.exit(1)
             
-        # 🛡️ [PHASE 12] Robust CLI Argument Handling
-        # Supports both "SYM1,SYM2" and SYM1 SYM2 formats
         raw_args = sys.argv[1:]
         symbols_list = []
         for arg in raw_args:
             symbols_list.extend([s.strip().upper() for s in arg.split(",") if s.strip()])
         
-        # Remove duplicates while preserving order
         symbols_list = list(dict.fromkeys(symbols_list))
-        
         output = get_quotes(symbols_list)
         safe_print(output)
         

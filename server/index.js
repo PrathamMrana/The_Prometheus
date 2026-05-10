@@ -97,7 +97,14 @@ const Persistence = require('./utils/persistence');
 app.get('/api/stats', (req, res) => {
     try {
         const cache = Persistence.load();
-        res.json({ success: true, data: Object.fromEntries(cache) });
+        // 🔱 [PHASE 21] MEMORY OPTIMIZATION: Return top 50 symbols only or just metadata
+        const results = {};
+        let count = 0;
+        for (const [k, v] of cache.entries()) {
+            results[k] = v;
+            if (++count >= 50) break;
+        }
+        res.json({ success: true, count: cache.size, data: results });
     } catch (e) {
         res.status(500).json({ success: false, error: e.message });
     }

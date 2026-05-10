@@ -114,6 +114,12 @@ function updateHistory(symbol, tick) {
     });
 
     if (arr.length > 40) arr.shift(); // 🛡️ [RENDER] Bound to 40 (was 300) to stay within 512MB free tier
+
+    // 🛡️ [PHASE 21] Map Size Guard
+    if (priceHistory.size > 100) {
+        const firstKey = priceHistory.keys().next().value;
+        priceHistory.delete(firstKey);
+    }
 }
 
 /**

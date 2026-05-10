@@ -211,7 +211,7 @@ class TickCoalescer {
 // Never saturate 100% of CPUs — that stalls the event loop.
 const RESERVED_CORES = 2;
 const TOTAL_CORES = os.cpus().length;
-const COMPUTE_CORES = Math.max(1, TOTAL_CORES - RESERVED_CORES);
+const COMPUTE_CORES = process.env.NODE_ENV === 'production' ? 1 : Math.max(1, TOTAL_CORES - RESERVED_CORES);
 
 module.exports = {
     TickCoalescer,
